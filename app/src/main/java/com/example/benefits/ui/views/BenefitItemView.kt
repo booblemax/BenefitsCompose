@@ -37,7 +37,6 @@ fun BenefitItem(item: BenefitModel) {
                 style = MaterialTheme.typography.subtitle1
             )
             DiscountView(
-                modifier = Modifier.padding(end = 12.dp),
                 text = item.discount
             )
         }

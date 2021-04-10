@@ -1,7 +1,7 @@
 package com.example.benefits.ui.views
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -12,24 +12,46 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.benefits.ui.theme.Yellow
 
 @Composable
-fun DiscountView(modifier: Modifier = Modifier, text: String = "") {
+fun DiscountView(text: String = "") {
+    Cloud(backgroundColor = Color.Yellow, contentColor = Color.Black, text = text)
+}
+
+@Composable
+fun PromoView(text: String, onClick: () -> Unit) {
+    Cloud(backgroundColor = Color.Blue, contentColor = Color.White, text = text, onClick = onClick)
+}
+
+@Composable
+fun Cloud(
+    modifier: Modifier = Modifier,
+    backgroundColor: Color,
+    contentColor: Color,
+    text: String,
+    onClick: () -> Unit = {}
+) {
     Surface(
-        modifier = modifier,
+        modifier = modifier.clickable { onClick() },
         shape = RoundedCornerShape(12.dp),
-        color = Color.Yellow,
+        color = backgroundColor,
+        contentColor = contentColor,
         elevation = 8.dp
     ) {
         Text(
             modifier = Modifier.padding(4.dp),
-            text = text)
+            text = text,
+            style = MaterialTheme.typography.body1
+        )
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewDiscountView() {
-    DiscountView(text = "10-15%")
+    Column {
+        DiscountView(text = "10-15%")
+        PromoView(text = "345678") {}
+    }
 }

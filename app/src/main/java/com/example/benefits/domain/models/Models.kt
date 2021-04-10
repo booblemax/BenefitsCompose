@@ -13,4 +13,7 @@ data class BenefitModel(
 data class AddressModel(
     val city: String,
     val street: String
-)
+) {
+
+    override fun toString(): String = "$city, $street"
+}
