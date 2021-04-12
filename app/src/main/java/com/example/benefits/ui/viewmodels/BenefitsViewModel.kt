@@ -14,7 +14,7 @@ import kotlin.coroutines.CoroutineContext
 
 class BenefitsViewModel : ViewModel() {
 
-    private val repo: BenefitsRepository
+    private val repo: BenefitsRepository = BenefitsRepositoryImpl()
 
     private val scope: CoroutineScope = CoroutineScope(Dispatchers.Main)
 
@@ -23,7 +23,7 @@ class BenefitsViewModel : ViewModel() {
     val benefitsState: StateFlow<Resource<List<BenefitModel>>> get() = mBenefitsState
 
     init {
-        repo = BenefitsRepositoryImpl()
+        loadData()
     }
 
     fun loadData() {
