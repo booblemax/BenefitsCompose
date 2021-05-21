@@ -2,16 +2,20 @@ package com.example.benefits.ui.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCompositionContext
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,22 +24,41 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.benefits.R
-import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
+import com.example.benefits.ui.Resource
 import com.example.benefits.ui.navigation.Router
-import com.example.benefits.ui.navigation.Screen
+import com.example.benefits.ui.navigation.Screens
+import com.example.benefits.ui.viewmodels.DetailsViewModel
 import com.example.benefits.ui.views.DiscountView
+import com.example.benefits.ui.views.Loading
 import com.example.benefits.ui.views.PromoView
 
 @Composable
-fun Details(router: Router, model: BenefitModel) {
+fun Details(router: Router, modelId: String) {
+    val viewModel = DetailsViewModel()
+    val modelState = viewModel.modelState.collectAsState()
+
+    when (val value = modelState.value) {
+        is Resource.Loading -> Loading()
+        is Resource.Success<BenefitModel> ->
+            DetailsContent(model = value.data) { router.back() }
+        is Resource.Error -> { }
+    }
+    viewModel.loadBenefit(modelId)
+}
+
+@Composable
+fun DetailsContent(
+    model: BenefitModel,
+    onNavBackClicked: () -> Unit
+) {
     val context = LocalContext.current
     Column(modifier = Modifier.padding(horizontal = 16.dp)) {
         Image(
             modifier = Modifier
                 .size(32.dp)
                 .padding(top = 16.dp)
-                .clickable { router.back() },
+                .clickable { onNavBackClicked() },
             painter = painterResource(id = R.drawable.ic_back),
             contentDescription = null
         )
@@ -101,7 +124,7 @@ fun Description(description: String) {
 fun DetailsScreenPreview() {
     Details(
         object : Router {
-            override fun navigateTo(screen: Screen) {
+            override fun navigateTo(screen: Screens, launchSingleTop: Boolean) {
                 TODO("Not yet implemented")
             }
 
@@ -109,16 +132,7 @@ fun DetailsScreenPreview() {
                 TODO("Not yet implemented")
             }
         },
-        BenefitModel(
-            "1",
-            "Vladka1",
-            "vladka1",
-            AddressModel("vladka1", "vladka1"),
-            "",
-            "",
-            "ashdlkjahsdlfkjhaslkdjhflakjshdfkljahskldjfklajshdflkjhaslkdhf",
-            "icon1"
-        )
+        ""
     )
 }
 

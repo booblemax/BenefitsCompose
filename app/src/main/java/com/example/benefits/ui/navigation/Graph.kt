@@ -4,6 +4,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
+import androidx.navigation.Navigation
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.screens.Benefits
 import com.example.benefits.ui.screens.Details
@@ -13,57 +22,47 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
 @Composable
-fun Graph(initialScreen: Screen) {
-    val scope = rememberCoroutineScope()
-    val graphState = remember { GraphState(initialScreen, scope) }
+fun Graph(initialScreen: Screens) {
+    val navController = rememberNavController()
+    val router = NavRouter(navController)
 
-    val screenState =
-        graphState.backStackState.collectAsState(initialScreen, scope.coroutineContext)
-
-    FactoryScreen(graphState, screen = screenState.value)
-}
-
-class GraphState(
-    initialScreen: Screen,
-    private val coroutineScope: CoroutineScope
-) : Router {
-
-    private val stackState = MutableSharedFlow<Screen>()
-    val backStackState: SharedFlow<Screen> get() = stackState
-
-    private val backStack = mutableListOf(initialScreen)
-
-    override fun navigateTo(screen: Screen) {
-        backStack.add(screen)
-        coroutineScope.launch { stackState.emit(screen) }
-    }
-
-    override fun back() {
-        backStack.removeFirst()
-        if (backStack.isNotEmpty()) {
-            navigateTo(backStack.first())
-        } else {
-            navigateTo(Screen.Exit)
+    NavHost(
+        navController = navController,
+        startDestination = initialScreen.screenName
+    ) {
+        composable(Screens.MAIN.screenName) { Benefits(router) }
+        composable(
+            "${Screens.DETAILS.screenName}/{model}",
+            arguments = listOf(navArgument("model") { type = NavType.StringType })
+        ) {
+            Details(router = router, model = it.arguments?.getString("model", "-1"))
         }
     }
 }
 
-@Composable
-fun FactoryScreen(router: Router, screen: Screen) {
-    when (screen) {
-        is Screen.DetailsScreen -> Details(router, model = screen.model)
-        Screen.MainScreen -> Benefits(router)
-        Screen.Exit -> { }
-    }
-}
-
 interface Router {
-    fun navigateTo(screen: Screen)
+
+    fun navigateTo(screen: Screens, launchSingleTop: Boolean = false)
     fun back()
 }
 
-sealed class Screen {
-    object MainScreen : Screen()
-    data class DetailsScreen(val model: BenefitModel) : Screen()
-    object Exit : Screen()
+enum class Screens(val screenName: String) {
+    MAIN("main"),
+    DETAILS("details")
+}
+
+class NavRouter(private val navController: NavController) : Router {
+
+    override fun navigateTo(screen: Screens, launchSingleTop: Boolean, arguments: Map<String, Any> = emptyMap()) {
+        if (arguments.isNotEmpty()) {
+            Navigation
+        }
+        navController.navigate(screen.toString()) {
+            this.launchSingleTop = launchSingleTop
+        }
+    }
+
+    override fun back() {
+        navController.popBackStack()
+    }
 }

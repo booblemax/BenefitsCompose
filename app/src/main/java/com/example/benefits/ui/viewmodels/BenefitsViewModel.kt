@@ -10,11 +10,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class BenefitsViewModel : ViewModel() {
 
-    private val repo: BenefitsRepository = BenefitsRepositoryImpl()
+    private val repo: BenefitsRepository = BenefitsRepositoryImpl
 
     private val scope: CoroutineScope = CoroutineScope(Dispatchers.Main)
 
@@ -29,7 +28,7 @@ class BenefitsViewModel : ViewModel() {
     fun loadData() {
         scope.launch {
             mBenefitsState.emit(Resource.Loading)
-            repo.getBenefits()
+            repo.getBenefitList()
                 .catch {
                     mBenefitsState.emit(
                         Resource.Error(
@@ -41,5 +40,4 @@ class BenefitsViewModel : ViewModel() {
                 }
         }
     }
-
 }

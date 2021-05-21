@@ -12,7 +12,7 @@ import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.Resource
 import com.example.benefits.ui.navigation.Router
-import com.example.benefits.ui.navigation.Screen
+import com.example.benefits.ui.navigation.Screens
 import com.example.benefits.ui.viewmodels.BenefitsViewModel
 import com.example.benefits.ui.views.BenefitItem
 import com.example.benefits.ui.views.Loading
@@ -26,7 +26,8 @@ fun Benefits(router: Router) {
         TopAppBar(title = { Text(text = "Benefits") })
         when (val value = benefitsState.value) {
             is Resource.Loading -> Loading()
-            is Resource.Success<List<BenefitModel>> -> BenefitsList(router, value.data)
+            is Resource.Success<List<BenefitModel>> ->
+                BenefitsList(value.data) { router.navigateTo(Screens.DETAILS) }
             is Resource.Error -> {
             }
             else -> {
@@ -36,12 +37,12 @@ fun Benefits(router: Router) {
 }
 
 @Composable
-fun BenefitsList(router: Router, items: List<BenefitModel>) {
+fun BenefitsList(items: List<BenefitModel>, onItemClick: (BenefitModel) -> Unit) {
     LazyColumn {
         items(items.size, { items[it].id }) { index ->
             val item = items[index]
             BenefitItem(item = item) {
-                router.navigateTo(Screen.DetailsScreen(item))
+                onItemClick(item)
             }
         }
     }
@@ -51,7 +52,7 @@ fun BenefitsList(router: Router, items: List<BenefitModel>) {
 @Composable
 fun Preview() {
     val router = object : Router {
-        override fun navigateTo(screen: Screen) {
+        override fun navigateTo(screen: Screens, launchSingleTop: Boolean) {
             TODO("Not yet implemented")
         }
 
@@ -60,7 +61,6 @@ fun Preview() {
         }
     }
     BenefitsList(
-        router,
         items = listOf(
             BenefitModel("1", "name1", "type1", AddressModel("city1", "street1"), "", "","","icon1"),
             BenefitModel("2", "name2", "type1", AddressModel("city1", "street1"),  "", "", "", "icon1"),
@@ -72,5 +72,5 @@ fun Preview() {
             BenefitModel("8", "name8", "type1", AddressModel("city1", "street1"), "", "","", "icon1"),
             BenefitModel("9", "name9", "type1", AddressModel("city1", "street1"), "", "","","icon1"),
             BenefitModel("10", "name10", "type1", AddressModel("city1", "street1"), "", "","","icon1"))
-    )
+    ) {}
 }
