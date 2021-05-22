@@ -6,14 +6,23 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class BenefitsRepositoryImpl : BenefitsRepository {
+object BenefitsRepositoryImpl : BenefitsRepository {
 
     private val dataExtractor = JsonDataExtractor()
 
-    override fun getBenefits(): Flow<List<BenefitModel>> = flow {
-        val benefitDtos = dataExtractor.loadDataFromJson()
-        val models = benefitDtos.map { it.toModel() }
+    private val cachedModels: MutableList<BenefitModel> = mutableListOf()
+
+    override fun getBenefitList(): Flow<List<BenefitModel>> = flow {
+        if (cachedModels.isEmpty()) {
+            val benefitDtos = dataExtractor.loadDataFromJson()
+            benefitDtos.map { it.toModel() }.toCollection(cachedModels)
+        }
         delay(1000L)
-        emit(models)
+        emit(cachedModels)
+    }
+
+    override fun getBenefit(id: String): Flow<BenefitModel> = flow {
+        delay(500L)
+        emit(cachedModels.first { it.id == id })
     }
 }
