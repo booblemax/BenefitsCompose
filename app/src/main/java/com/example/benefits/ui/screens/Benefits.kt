@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.Resource
@@ -19,7 +20,7 @@ import com.example.benefits.ui.views.Loading
 
 @Composable
 fun Benefits(router: Router) {
-    val viewModel = remember { BenefitsViewModel() }
+    val viewModel = viewModel(BenefitsViewModel::class.java, Screens.MAIN.toString())
     val benefitsState = viewModel.benefitsState.collectAsState()
 
     Column {
@@ -28,10 +29,7 @@ fun Benefits(router: Router) {
             is Resource.Loading -> Loading()
             is Resource.Success<List<BenefitModel>> ->
                 BenefitsList(value.data) { router.navigateTo(Screens.DETAILS) }
-            is Resource.Error -> {
-            }
-            else -> {
-            }
+            is Resource.Error -> { }
         }
     }
 }
@@ -51,15 +49,6 @@ fun BenefitsList(items: List<BenefitModel>, onItemClick: (BenefitModel) -> Unit)
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    val router = object : Router {
-        override fun navigateTo(screen: Screens, launchSingleTop: Boolean) {
-            TODO("Not yet implemented")
-        }
-
-        override fun back() {
-            TODO("Not yet implemented")
-        }
-    }
     BenefitsList(
         items = listOf(
             BenefitModel("1", "name1", "type1", AddressModel("city1", "street1"), "", "","","icon1"),

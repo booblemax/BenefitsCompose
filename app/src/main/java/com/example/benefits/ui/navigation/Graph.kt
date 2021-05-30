@@ -4,10 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavType
-import androidx.navigation.Navigation
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
@@ -32,17 +29,17 @@ fun Graph(initialScreen: Screens) {
     ) {
         composable(Screens.MAIN.screenName) { Benefits(router) }
         composable(
-            "${Screens.DETAILS.screenName}/{model}",
-            arguments = listOf(navArgument("model") { type = NavType.StringType })
+            "${Screens.DETAILS.screenName}/{modelId}",
+            arguments = listOf(navArgument("modelId") { type = NavType.StringType })
         ) {
-            Details(router = router, model = it.arguments?.getString("model", "-1"))
+            Details(router = router, modelId = it.arguments?.getString("modelId", "-1") ?: "-1")
         }
     }
 }
 
 interface Router {
 
-    fun navigateTo(screen: Screens, launchSingleTop: Boolean = false)
+    fun navigateTo(screen: Screens, launchSingleTop: Boolean = false, arguments: Map<String, Any> = emptyMap())
     fun back()
 }
 
@@ -53,13 +50,12 @@ enum class Screens(val screenName: String) {
 
 class NavRouter(private val navController: NavController) : Router {
 
-    override fun navigateTo(screen: Screens, launchSingleTop: Boolean, arguments: Map<String, Any> = emptyMap()) {
+    override fun navigateTo(screen: Screens, launchSingleTop: Boolean, arguments: Map<String, Any>) {
+        var route = screen.toString()
         if (arguments.isNotEmpty()) {
-            Navigation
+            route += "?" + arguments.map { "${it.key}=${it.value}" }.joinToString()
         }
-        navController.navigate(screen.toString()) {
-            this.launchSingleTop = launchSingleTop
-        }
+        navController.navigate(route) { this.launchSingleTop = launchSingleTop }
     }
 
     override fun back() {

@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.benefits.R
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.Resource
@@ -35,7 +36,7 @@ import com.example.benefits.ui.views.PromoView
 
 @Composable
 fun Details(router: Router, modelId: String) {
-    val viewModel = DetailsViewModel()
+    val viewModel = viewModel(DetailsViewModel::class.java, Screens.DETAILS.toString())
     val modelState = viewModel.modelState.collectAsState()
 
     when (val value = modelState.value) {
@@ -122,17 +123,9 @@ fun Description(description: String) {
 @Preview(showBackground = true)
 @Composable
 fun DetailsScreenPreview() {
-    Details(
-        object : Router {
-            override fun navigateTo(screen: Screens, launchSingleTop: Boolean) {
-                TODO("Not yet implemented")
-            }
-
-            override fun back() {
-                TODO("Not yet implemented")
-            }
-        },
-        ""
+    DetailsContent(
+        BenefitModel(),
+        { }
     )
 }
 
