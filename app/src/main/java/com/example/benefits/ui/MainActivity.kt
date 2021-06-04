@@ -1,4 +1,4 @@
-package com.example.benefits
+package com.example.benefits.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

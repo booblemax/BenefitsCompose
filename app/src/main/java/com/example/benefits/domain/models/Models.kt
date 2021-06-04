@@ -10,6 +10,7 @@ data class BenefitModel(
     val type: String = "",
     val address: AddressModel = AddressModel(),
     val discount: String = "",
+    val discountType: String = "",
     val promo: String = "",
     val description: String = "",
     val icon: String = ""

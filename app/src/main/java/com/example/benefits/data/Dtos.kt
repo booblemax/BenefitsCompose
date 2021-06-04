@@ -1,14 +1,20 @@
 package com.example.benefits.data
 
+import androidx.room.Entity
+import androidx.room.TypeConverters
+import com.example.benefits.data.converter.AddressConverter
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
 
-data class BenefitDto(
+@Entity(tableName = "benefits")
+@TypeConverters(AddressConverter::class)
+data class BenefitEntity(
     val id: String,
     val name: String,
     val type: String,
     val address: AddressDto,
     val discount: String,
+    val discountType: String,
     val promo: String,
     val description: String,
     val icon: String
@@ -19,13 +25,27 @@ data class AddressDto(
     val street: String
 )
 
-fun BenefitDto.toModel() =
+fun BenefitEntity.toModel() =
     BenefitModel(
         id,
         name,
         type,
         address.toModel(),
         discount,
+        discountType,
+        promo,
+        description,
+        icon
+    )
+
+fun BenefitModel.toEntity() =
+    BenefitEntity(
+        id,
+        name,
+        type,
+        address.toDto(),
+        discount,
+        discountType,
         promo,
         description,
         icon
@@ -33,6 +53,12 @@ fun BenefitDto.toModel() =
 
 fun AddressDto.toModel() =
     AddressModel(
+        city,
+        street
+    )
+
+fun AddressModel.toDto() =
+    AddressDto(
         city,
         street
     )
