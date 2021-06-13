@@ -5,22 +5,22 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.Resource
-import com.example.benefits.ui.navigation.Router
 import com.example.benefits.ui.navigation.Screens
 import com.example.benefits.ui.viewmodels.BenefitsViewModel
 import com.example.benefits.ui.views.BenefitItem
+import com.example.benefits.ui.views.ErrorView
 import com.example.benefits.ui.views.Loading
 
 @Composable
-fun Benefits(router: Router) {
-    val viewModel = viewModel(BenefitsViewModel::class.java, Screens.MAIN.toString())
+fun Benefits(navigateTo: (String) -> Unit) {
+    val viewModel = viewModel(BenefitsViewModel::class.java, Screens.Main.toString())
     val benefitsState = viewModel.benefitsState.collectAsState()
 
     Column {
@@ -28,9 +28,15 @@ fun Benefits(router: Router) {
         when (val value = benefitsState.value) {
             is Resource.Loading -> Loading()
             is Resource.Success<List<BenefitModel>> ->
-                BenefitsList(value.data) { router.navigateTo(Screens.DETAILS) }
-            is Resource.Error -> { }
+                BenefitsList(value.data) { navigateTo(Screens.Details.createRoute(it.id)) }
+            is Resource.Error -> ErrorView(error = value.error) {
+                viewModel.loadData()
+            }
         }
+    }
+
+    LaunchedEffect(key1 = Screens.Main) {
+        viewModel.loadData()
     }
 }
 

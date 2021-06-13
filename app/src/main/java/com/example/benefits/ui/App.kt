@@ -8,19 +8,17 @@ import com.example.benefits.data.BenefitsRepositoryImpl
 import com.example.benefits.data.DbInitializer
 import com.example.benefits.data.JsonDataExtractor
 import com.example.benefits.data.db.BenefitsDb
+import com.example.benefits.di.DbManager
 import com.example.benefits.domain.BenefitsRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class App : Application() {
 
-    val db by lazy {
-        Room.databaseBuilder(this, BenefitsDb::class.java, "benefitsDb").build()
-    }
-
     val repository: BenefitsRepository by lazy {
-        BenefitsRepositoryImpl(db.benefitsDao)
+        BenefitsRepositoryImpl(DbManager.benefitsDao)
     }
 
     val dbInitializer: DbInitializer by lazy {
@@ -29,6 +27,9 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Timber.plant(Timber.DebugTree())
+
+        DbManager.init(this)
 
         GlobalScope.launch {
             dbInitializer.init()

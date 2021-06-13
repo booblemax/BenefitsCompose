@@ -1,6 +1,7 @@
 package com.example.benefits.data
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.benefits.data.converter.AddressConverter
 import com.example.benefits.domain.models.AddressModel
@@ -9,6 +10,7 @@ import com.example.benefits.domain.models.BenefitModel
 @Entity(tableName = "benefits")
 @TypeConverters(AddressConverter::class)
 data class BenefitEntity(
+    @PrimaryKey
     val id: String,
     val name: String,
     val type: String,

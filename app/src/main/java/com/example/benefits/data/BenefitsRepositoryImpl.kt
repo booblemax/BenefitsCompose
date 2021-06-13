@@ -6,31 +6,21 @@ import com.example.benefits.domain.models.BenefitModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 class BenefitsRepositoryImpl(
     private val benefitsDao: BenefitsDao
 ) : BenefitsRepository {
 
-    private val dataExtractor = JsonDataExtractor()
-
-    private val cachedModels: MutableList<BenefitModel> = mutableListOf()
-
     override fun saveBenefits(benefits: List<BenefitModel>) {
-        benefitsDao.insert(benefits.toTypedArra)
+        benefitsDao.insert(*benefits.map { it.toEntity() }.toTypedArray())
     }
 
-    override fun getBenefitList(): Flow<List<BenefitModel>> =
-        flow {
-        if (cachedModels.isEmpty()) {
-            val benefitDtos = dataExtractor.loadDataFromJson()
-            benefitDtos.map { it.toModel() }.toCollection(cachedModels)
-        }
-        delay(1000L)
-        emit(cachedModels)
+    override fun getBenefitList(): Flow<List<BenefitModel>> = flow {
+        benefitsDao.getAll().map { models -> models.toModel() }.run { emit(this) }
     }
 
     override fun getBenefit(id: String): Flow<BenefitModel> = flow {
-        delay(500L)
-        emit(cachedModels.first { it.id == id })
+        benefitsDao.getById(id).toModel().run { emit(this) }
     }
 }

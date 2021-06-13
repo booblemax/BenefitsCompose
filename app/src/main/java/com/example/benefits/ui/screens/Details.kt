@@ -15,6 +15,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,25 +28,30 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.benefits.R
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.Resource
-import com.example.benefits.ui.navigation.Router
 import com.example.benefits.ui.navigation.Screens
 import com.example.benefits.ui.viewmodels.DetailsViewModel
 import com.example.benefits.ui.views.DiscountView
+import com.example.benefits.ui.views.ErrorView
 import com.example.benefits.ui.views.Loading
 import com.example.benefits.ui.views.PromoView
 
 @Composable
-fun Details(router: Router, modelId: String) {
-    val viewModel = viewModel(DetailsViewModel::class.java, Screens.DETAILS.toString())
+fun Details(modelId: String, navBack: () -> Unit) {
+    val viewModel = viewModel(DetailsViewModel::class.java, Screens.Details.toString())
     val modelState = viewModel.modelState.collectAsState()
 
     when (val value = modelState.value) {
         is Resource.Loading -> Loading()
         is Resource.Success<BenefitModel> ->
-            DetailsContent(model = value.data) { router.back() }
-        is Resource.Error -> { }
+            DetailsContent(model = value.data) { navBack() }
+        is Resource.Error -> ErrorView(error = value.error) {
+            viewModel.loadBenefit(modelId)
+        }
     }
-    viewModel.loadBenefit(modelId)
+
+    LaunchedEffect(key1 = Screens.Details.toString()) {
+        viewModel.loadBenefit(modelId)
+    }
 }
 
 @Composable
