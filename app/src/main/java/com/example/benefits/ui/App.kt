@@ -1,35 +1,35 @@
 package com.example.benefits.ui
 
 import android.app.Application
-import android.database.DatabaseUtils
-import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.benefits.data.BenefitsRepositoryImpl
 import com.example.benefits.data.DbInitializer
 import com.example.benefits.data.JsonDataExtractor
-import com.example.benefits.data.db.BenefitsDb
-import com.example.benefits.di.DbManager
+import com.example.benefits.di.dbModule
+import com.example.benefits.di.domainModule
+import com.example.benefits.di.vmModule
 import com.example.benefits.domain.BenefitsRepository
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.Koin
+import org.koin.core.context.startKoin
 import timber.log.Timber
 
 class App : Application() {
 
-    val repository: BenefitsRepository by lazy {
-        BenefitsRepositoryImpl(DbManager.benefitsDao)
-    }
-
-    val dbInitializer: DbInitializer by lazy {
-        DbInitializer(this, JsonDataExtractor(), repository)
-    }
+    private val dbInitializer by inject<DbInitializer>()
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
 
-        DbManager.init(this)
+        startKoin {
+            androidLogger()
+            androidContext(this@App)
+            modules(dbModule, domainModule, vmModule)
+        }
 
         GlobalScope.launch {
             dbInitializer.init()

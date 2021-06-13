@@ -17,10 +17,12 @@ import com.example.benefits.ui.viewmodels.BenefitsViewModel
 import com.example.benefits.ui.views.BenefitItem
 import com.example.benefits.ui.views.ErrorView
 import com.example.benefits.ui.views.Loading
+import org.koin.androidx.compose.getStateViewModel
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun Benefits(navigateTo: (String) -> Unit) {
-    val viewModel = viewModel(BenefitsViewModel::class.java, Screens.Main.toString())
+    val viewModel = getViewModel<BenefitsViewModel>()
     val benefitsState = viewModel.benefitsState.collectAsState()
 
     Column {

@@ -34,10 +34,11 @@ import com.example.benefits.ui.views.DiscountView
 import com.example.benefits.ui.views.ErrorView
 import com.example.benefits.ui.views.Loading
 import com.example.benefits.ui.views.PromoView
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun Details(modelId: String, navBack: () -> Unit) {
-    val viewModel = viewModel(DetailsViewModel::class.java, Screens.Details.toString())
+    val viewModel = getViewModel<DetailsViewModel>()
     val modelState = viewModel.modelState.collectAsState()
 
     when (val value = modelState.value) {
