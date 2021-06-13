@@ -28,7 +28,7 @@ class DetailsViewModel : ViewModel() {
     val modelState: StateFlow<Resource<BenefitModel>> get() = mModelState
 
     fun loadBenefit(id: String) {
-        scope.launch(Dispatchers.IO) {
+        scope.launch {
             mModelState.emit(Resource.Loading)
             delay(1500L)
             repo.getBenefit(id)

@@ -16,11 +16,9 @@ class BenefitsRepositoryImpl(
         benefitsDao.insert(*benefits.map { it.toEntity() }.toTypedArray())
     }
 
-    override fun getBenefitList(): Flow<List<BenefitModel>> = flow {
-        benefitsDao.getAll().map { models -> models.toModel() }.run { emit(this) }
-    }
+    override fun getBenefitList(): Flow<List<BenefitModel>> =
+            benefitsDao.getAll().map { models -> models.map { it.toModel() } }
 
-    override fun getBenefit(id: String): Flow<BenefitModel> = flow {
-        benefitsDao.getById(id).toModel().run { emit(this) }
-    }
+    override fun getBenefit(id: String): Flow<BenefitModel> =
+            benefitsDao.getById(id).map { it.toModel() }
 }

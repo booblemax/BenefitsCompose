@@ -17,8 +17,8 @@ interface BenefitsDao {
     fun delete(vararg models: BenefitEntity)
 
     @Query("SELECT * FROM benefits")
-    fun getAll(): List<BenefitEntity>
+    fun getAll(): Flow<List<BenefitEntity>>
 
     @Query("SELECT * FROM benefits WHERE id = :id")
-    fun getById(id: String): BenefitEntity
+    fun getById(id: String): Flow<BenefitEntity>
 }
