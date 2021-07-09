@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun DiscountView(text: String = "") {
-    Cloud(backgroundColor = Color.Yellow, contentColor = Color.Black, text = text)
+    Cloud(backgroundColor = Color.Yellow, contentColor = Color.Black, text = "$text%")
 }
 
 @Composable
@@ -39,7 +39,7 @@ fun Cloud(
         elevation = 8.dp
     ) {
         Text(
-            modifier = Modifier.padding(4.dp),
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
             text = text,
             style = MaterialTheme.typography.body1
         )
@@ -51,7 +51,7 @@ fun Cloud(
 @Composable
 fun PreviewDiscountView() {
     Column {
-        DiscountView(text = "10-15%")
+        DiscountView(text = "10-15")
         PromoView(text = "345678") {}
     }
 }

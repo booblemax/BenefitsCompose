@@ -19,16 +19,14 @@ import androidx.compose.ui.unit.dp
 import com.example.benefits.R
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
-// добавить отступы между итемами,
-// доделать на отображение всех списком без детальной информации,
 // поправить итемы на нормальный вид
 // добавить все скидк
 @Composable
-fun BenefitItem(modifier: Modifier, model: BenefitModel, onItemClicked: () -> Unit) {
+fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicked: () -> Unit) {
     val context = LocalContext.current
     Card(
         modifier = modifier,
-        shape = MaterialTheme.shapes.medium,
+        shape = RoundedCornerShape(6.dp),
     ) {
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Image(
@@ -43,6 +41,7 @@ fun BenefitItem(modifier: Modifier, model: BenefitModel, onItemClicked: () -> Un
                     modifier = Modifier.weight(1f).padding(end = 12.dp)
                 ) {
                     Text(
+                        modifier = Modifier.padding(start = 12.dp),
                         text = model.name,
                         style = MaterialTheme.typography.h4
                     )
@@ -58,6 +57,7 @@ fun BenefitItem(modifier: Modifier, model: BenefitModel, onItemClicked: () -> Un
                     )
                 }
                 Column(
+                    modifier = Modifier.padding(end = 12.dp),
                     horizontalAlignment = Alignment.End,
                 ) {
                     Spacer(modifier = Modifier.height(12.dp))
@@ -81,7 +81,6 @@ fun Description(description: String) {
             .fillMaxWidth()
             .padding(vertical = 12.dp),
         color = Color.LightGray,
-
         shape = RoundedCornerShape(6.dp)
     ) {
         Text(
@@ -100,10 +99,10 @@ fun PreviewBenefitItemView() {
             "name1",
             "type1",
             AddressModel("city1", "street1"),
-            "10-15%",
+            "10-15",
             "",
-            "",
-            "icon1"
+            "12345",
+            "описаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописание"
         )
     ) {}
 }
