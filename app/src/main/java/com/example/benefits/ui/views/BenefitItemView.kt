@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.example.benefits.R
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
-// поправить итемы на нормальный вид
+// поправить итемы на нормальный вид, найти норм дизайн для итемов (Влада)
 // добавить все скидк
 @Composable
 fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicked: () -> Unit) {

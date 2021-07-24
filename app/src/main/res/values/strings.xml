@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Benefits</string>
+
+    <string name="navigation_tab_list">List</string>
+    <string name="navigation_tab_map">Map</string>
+    <string name="navigation_tab_news">News</string>
+    <string name="navigation_tab_settings">Settings</string>
 </resources>

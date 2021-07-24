@@ -10,7 +10,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.Resource
@@ -19,7 +18,6 @@ import com.example.benefits.ui.viewmodels.BenefitsViewModel
 import com.example.benefits.ui.views.BenefitItem
 import com.example.benefits.ui.views.ErrorView
 import com.example.benefits.ui.views.Loading
-import org.koin.androidx.compose.getStateViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -39,7 +37,7 @@ fun Benefits(navigateTo: (String) -> Unit) {
         }
     }
 
-    LaunchedEffect(key1 = Screens.Main) {
+    LaunchedEffect(key1 = Screens.List) {
         viewModel.loadData()
     }
 }
