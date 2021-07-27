@@ -18,6 +18,7 @@ data class BenefitEntity(
     val discount: String,
     val discountType: String,
     val promo: String,
+    val site: String,
     val description: String,
     val icon: String
 )
@@ -49,6 +50,7 @@ fun BenefitModel.toEntity() =
         discount,
         discountType,
         promo,
+        site,
         description,
         icon
     )

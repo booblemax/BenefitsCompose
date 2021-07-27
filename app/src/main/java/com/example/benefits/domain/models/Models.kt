@@ -12,6 +12,7 @@ data class BenefitModel(
     val discount: String = "",
     val discountType: String = "",
     val promo: String = "",
+    val site: String = "",
     val description: String = "",
     val icon: String = ""
 ) : Parcelable

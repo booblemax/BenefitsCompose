@@ -1,7 +1,9 @@
 package com.example.benefits.ui.navigation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,10 +16,11 @@ fun Graph(initialScreen: Screens) {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { BottomBarNavigator(navController) }
-    ) {
+    ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = initialScreen.screenName
+            startDestination = initialScreen.screenName,
+            modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screens.List.screenName) {
                 Benefits { route -> navController.navigate(route) }

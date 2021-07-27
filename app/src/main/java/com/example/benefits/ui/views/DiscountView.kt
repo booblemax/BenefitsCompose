@@ -14,13 +14,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DiscountView(text: String = "") {
-    Cloud(backgroundColor = Color.Yellow, contentColor = Color.Black, text = "$text%")
+fun DiscountView(modifier: Modifier = Modifier, text: String = "") {
+    Cloud(modifier, backgroundColor = Color.Yellow, contentColor = Color.Black, text = "$text%")
 }
 
 @Composable
-fun PromoView(text: String, onClick: () -> Unit) {
-    Cloud(backgroundColor = Color.Blue, contentColor = Color.White, text = text, onClick = onClick)
+fun PromoView(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
+    Cloud(modifier, backgroundColor = Color.Blue, contentColor = Color.White, text = text, onClick = onClick)
 }
 
 @Composable
@@ -41,7 +41,7 @@ fun Cloud(
         Text(
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
             text = text,
-            style = MaterialTheme.typography.body1
+            style = MaterialTheme.typography.h6
         )
     }
 }

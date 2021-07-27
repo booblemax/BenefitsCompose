@@ -2,56 +2,60 @@
   {
     "id": "1",
     "name": "Гамбринус",
-    "type": "Кафе",
+    "type": "Cafe",
     "address": {
       "city": "Минск",
       "address": "address"
     },
     "discount": "10",
-    "discountType": "скидка",
-    "promo": "Бейдж",
+    "discountType": "discount",
+    "promo": "-1",
+    "site": "https://www.gambrinus.by/",
     "description": "Скидка предоставляется на все меню кухни",
     "icon": "icon"
   },
   {
     "id": "2",
     "name": "Додо Пицца",
-    "type": "Пиццерия",
+    "type": "Pizza",
     "address": {
       "city": "Минск",
       "address": "address"
     },
     "discount": "20",
-    "discountType": "скидка",
+    "discountType": "discount",
     "promo": "34567",
+    "site": "https://www.dodopizza.by/",
     "description": "Действует для все сотрудников MBicycle по промокоду",
     "icon": "icon"
   },
   {
     "id": "3",
     "name": "Domino's",
-    "type": "Пиццерия",
+    "type": "Pizza",
     "address": {
       "city": "Минск",
       "address": "address"
     },
     "discount": "25",
-    "discountType": "скидка",
+    "discountType": "discount",
     "promo": "",
+    "site": "https://www.dominos.by/",
     "description": "Скидка достпуна только для заказа на указанный адрес офиса. Учетная запись mbicyclemin@mail.ru, пароль dominospizza",
     "icon": "icon"
   },
   {
     "id": "4",
     "name": "Garage",
-    "type": "Кафе",
+    "type": "Cafe",
     "address": {
       "city": "Минск",
       "address": "address"
     },
     "discount": "5",
-    "discountType": "кешбек",
+    "discountType": "cashback",
     "promo": "",
+    "site": "https://www.garage.by/",
     "description": "Корпоративная скидка действует только для зарегестрированных пользователей на сайте или приложении Гараж",
     "icon": "icon"
   }

@@ -12,15 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.benefits.R
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
+
 // поправить итемы на нормальный вид, найти норм дизайн для итемов (Влада)
-// добавить все скидк
 @Composable
 fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicked: () -> Unit) {
     val context = LocalContext.current
@@ -32,42 +34,40 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
             Image(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth()
+                    .height(210.dp)
                     .padding(top = 12.dp),
-                painter = painterResource(id = R.drawable.ic_test),
+                painter = painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = null
             )
             Row(modifier = Modifier.padding(top = 24.dp)) {
-                Column(
-                    modifier = Modifier.weight(1f).padding(end = 12.dp)
-                ) {
-                    Text(
-                        modifier = Modifier.padding(start = 12.dp),
-                        text = model.name,
-                        style = MaterialTheme.typography.h4
-                    )
-                    Text(
-                        modifier = Modifier.padding(start = 12.dp),
-                        text = model.address.toString(),
-                        style = MaterialTheme.typography.subtitle1
-                    )
-                    Text(
-                        modifier = Modifier.padding(start = 12.dp),
-                        text = model.type,
-                        style = MaterialTheme.typography.body2
-                    )
-                }
-                Column(
-                    modifier = Modifier.padding(end = 12.dp),
-                    horizontalAlignment = Alignment.End,
-                ) {
-                    Spacer(modifier = Modifier.height(12.dp))
-                    DiscountView(text = model.discount)
-                    Spacer(modifier = Modifier.height(12.dp))
-                    PromoView(text = model.promo, onClick = {
-                        Toast.makeText(context, "promo clicked ${model.promo}", Toast.LENGTH_SHORT)
-                            .show()
-                    })
-                }
+                Text(
+                    modifier = Modifier.padding(start = 12.dp),
+                    text = model.name,
+                    style = MaterialTheme.typography.h5,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                DiscountView(text = model.discount)
+            }
+            Text(
+                modifier = Modifier.padding(start = 12.dp),
+                text = model.address.toString(),
+                style = MaterialTheme.typography.h5,
+                color = Color.Gray
+            )
+            Row {
+                Text(
+                    modifier = Modifier.padding(start = 12.dp),
+                    text = model.type,
+                    style = MaterialTheme.typography.h6,
+                    color = Color.Gray
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                PromoView(text = model.promo, onClick = {
+                    Toast.makeText(context, "promo clicked ${model.promo}", Toast.LENGTH_SHORT)
+                        .show()
+                })
             }
             Description(model.description)
         }
@@ -102,6 +102,7 @@ fun PreviewBenefitItemView() {
             "10-15",
             "",
             "12345",
+            "site.com",
             "описаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописание"
         )
     ) {}
