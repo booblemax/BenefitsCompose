@@ -5,4 +5,8 @@
     <string name="navigation_tab_map">Map</string>
     <string name="navigation_tab_news">News</string>
     <string name="navigation_tab_settings">Settings</string>
+
+    <string name="shop_name">Магазин</string>
+    <string name="cafe_name">Кафе/Ресторан</string>
+    <string name="undefined_name">Бездна</string>
 </resources>

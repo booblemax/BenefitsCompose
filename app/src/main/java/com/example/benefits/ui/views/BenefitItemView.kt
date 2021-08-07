@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -21,8 +20,9 @@ import androidx.compose.ui.unit.dp
 import com.example.benefits.R
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
+import com.example.benefits.domain.PlaceType
+import com.example.benefits.ui.views.EnumMapper.stringName
 
-// поправить итемы на нормальный вид, найти норм дизайн для итемов (Влада)
 @Composable
 fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicked: () -> Unit) {
     val context = LocalContext.current
@@ -50,16 +50,10 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                 Spacer(modifier = Modifier.weight(1f))
                 DiscountView(text = model.discount)
             }
-            Text(
-                modifier = Modifier.padding(start = 12.dp),
-                text = model.address.toString(),
-                style = MaterialTheme.typography.h5,
-                color = Color.Gray
-            )
             Row {
                 Text(
                     modifier = Modifier.padding(start = 12.dp),
-                    text = model.type,
+                    text = stringName(model.type, context),
                     style = MaterialTheme.typography.h6,
                     color = Color.Gray
                 )
@@ -97,7 +91,7 @@ fun PreviewBenefitItemView() {
         model = BenefitModel(
             "1",
             "name1",
-            "type1",
+            PlaceType.SHOP,
             AddressModel("city1", "street1"),
             "10-15",
             "",

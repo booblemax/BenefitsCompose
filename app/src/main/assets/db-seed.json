@@ -2,7 +2,7 @@
   {
     "id": "1",
     "name": "Гамбринус",
-    "type": "Cafe",
+    "type": "cafe",
     "address": {
       "city": "Минск",
       "address": "address"
@@ -17,7 +17,7 @@
   {
     "id": "2",
     "name": "Додо Пицца",
-    "type": "Pizza",
+    "type": "cafe",
     "address": {
       "city": "Минск",
       "address": "address"
@@ -32,7 +32,7 @@
   {
     "id": "3",
     "name": "Domino's",
-    "type": "Pizza",
+    "type": "cafe",
     "address": {
       "city": "Минск",
       "address": "address"
@@ -47,7 +47,7 @@
   {
     "id": "4",
     "name": "Garage",
-    "type": "Cafe",
+    "type": "cafe",
     "address": {
       "city": "Минск",
       "address": "address"

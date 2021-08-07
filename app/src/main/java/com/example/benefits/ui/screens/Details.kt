@@ -30,10 +30,8 @@ import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.Resource
 import com.example.benefits.ui.navigation.Screens
 import com.example.benefits.ui.viewmodels.DetailsViewModel
-import com.example.benefits.ui.views.DiscountView
-import com.example.benefits.ui.views.ErrorView
-import com.example.benefits.ui.views.Loading
-import com.example.benefits.ui.views.PromoView
+import com.example.benefits.ui.views.*
+import com.example.benefits.ui.views.EnumMapper.stringName
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -90,7 +88,7 @@ fun DetailsContent(
                     style = MaterialTheme.typography.subtitle1
                 )
                 Text(
-                    text = model.type,
+                    text = stringName(model.type, context),
                     style = MaterialTheme.typography.body2
                 )
             }

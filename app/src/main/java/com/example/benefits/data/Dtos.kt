@@ -6,6 +6,7 @@ import androidx.room.TypeConverters
 import com.example.benefits.data.converter.AddressConverter
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
+import com.example.benefits.domain.models.map
 
 @Entity(tableName = "benefits")
 @TypeConverters(AddressConverter::class)
@@ -32,7 +33,7 @@ fun BenefitEntity.toModel() =
     BenefitModel(
         id,
         name,
-        type,
+        type.map(),
         address.toModel(),
         discount,
         discountType,
@@ -45,7 +46,7 @@ fun BenefitModel.toEntity() =
     BenefitEntity(
         id,
         name,
-        type,
+        type.name.lowercase(),
         address.toDto(),
         discount,
         discountType,

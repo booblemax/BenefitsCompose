@@ -35,8 +35,7 @@ fun Cloud(
         modifier = modifier.clickable { onClick() },
         shape = RoundedCornerShape(12.dp),
         color = backgroundColor,
-        contentColor = contentColor,
-        elevation = 8.dp
+        contentColor = contentColor
     ) {
         Text(
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
