@@ -1,5 +1,7 @@
 package com.example.benefits.ui.views
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -62,15 +64,29 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                 Spacer(modifier = Modifier.weight(1f))
                 PromoView(
                     text = model.promoName(context),
-                    onClick = {
-                    Toast.makeText(context, "promo clicked ${model.promo}", Toast.LENGTH_SHORT)
-                        .show()
-                    }
+                    onClick = { copyPromoInClipboard(context, model.promo) }
                 )
             }
             Description(model.description)
         }
     }
+}
+
+private fun copyPromoInClipboard(context: Context, promo: String) {
+    val clipBoardManager =
+        context.getSystemService(ClipboardManager::class.java) as ClipboardManager
+    val clipData = ClipData(
+        context.getString(R.string.clip_promo_description),
+        arrayOf("plain/text"),
+        ClipData.Item(promo)
+    )
+    clipBoardManager.setPrimaryClip(clipData)
+    Toast.makeText(
+        context,
+        context.getString(R.string.clip_promo_copied_successfully),
+        Toast.LENGTH_SHORT
+    )
+        .show()
 }
 
 @Composable
