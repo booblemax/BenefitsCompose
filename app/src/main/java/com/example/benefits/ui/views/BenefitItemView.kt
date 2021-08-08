@@ -3,8 +3,11 @@ package com.example.benefits.ui.views
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -18,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.benefits.R
@@ -67,26 +71,21 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                     onClick = { copyPromoInClipboard(context, model.promo) }
                 )
             }
+            if (model.site.isNotEmpty()) {
+                Text(
+                    modifier =
+                        Modifier
+                            .padding(top = 4.dp, start = 12.dp)
+                            .clickable { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(model.site))) },
+                    text = model.site,
+                    style = MaterialTheme.typography.subtitle2,
+                    color = Color.Gray,
+                    textDecoration = TextDecoration.Underline
+                )
+            }
             Description(model.description)
         }
     }
-}
-
-private fun copyPromoInClipboard(context: Context, promo: String) {
-    val clipBoardManager =
-        context.getSystemService(ClipboardManager::class.java) as ClipboardManager
-    val clipData = ClipData(
-        context.getString(R.string.clip_promo_description),
-        arrayOf("plain/text"),
-        ClipData.Item(promo)
-    )
-    clipBoardManager.setPrimaryClip(clipData)
-    Toast.makeText(
-        context,
-        context.getString(R.string.clip_promo_copied_successfully),
-        Toast.LENGTH_SHORT
-    )
-        .show()
 }
 
 @Composable
@@ -128,4 +127,21 @@ fun PreviewBenefitItemView() {
             "описаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописание"
         )
     ) {}
+}
+
+private fun copyPromoInClipboard(context: Context, promo: String) {
+    val clipBoardManager =
+        context.getSystemService(ClipboardManager::class.java) as ClipboardManager
+    val clipData = ClipData(
+        context.getString(R.string.clip_promo_description),
+        arrayOf("plain/text"),
+        ClipData.Item(promo)
+    )
+    clipBoardManager.setPrimaryClip(clipData)
+    Toast.makeText(
+        context,
+        context.getString(R.string.clip_promo_copied_successfully),
+        Toast.LENGTH_SHORT
+    )
+        .show()
 }
