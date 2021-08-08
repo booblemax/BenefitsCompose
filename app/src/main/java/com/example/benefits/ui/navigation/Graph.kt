@@ -22,6 +22,9 @@ fun Graph(initialScreen: Screens) {
             startDestination = initialScreen.screenName,
             modifier = Modifier.padding(innerPadding)
         ) {
+            composable(Screens.Splash.screenName) {
+                Splash { navController.navigate(Screens.List.screenName) }
+            }
             composable(Screens.List.screenName) {
                 Benefits { route -> navController.navigate(route) }
             }
@@ -47,6 +50,7 @@ fun Graph(initialScreen: Screens) {
 }
 
 sealed class Screens(val screenName: String) {
+    object Splash : Screens("splash")
     object List : Screens("list")
     object News : Screens("news")
     object Map : Screens("map")

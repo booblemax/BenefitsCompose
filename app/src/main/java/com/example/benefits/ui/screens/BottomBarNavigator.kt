@@ -22,50 +22,58 @@ fun BottomBarNavigator(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomNavigation {
-        BottomNavigationItem(
-            currentDestination?.hierarchy?.any { it.route == Screens.List.screenName } == true,
-            onClick = { navController.navigate(Screens.List.screenName) },
-            icon = {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_list),
-                    context.getString(R.string.navigation_tab_list)
-                )
-            },
-            label = { Text(context.getString(R.string.navigation_tab_list)) }
-        )
-        BottomNavigationItem(
-            currentDestination?.hierarchy?.any { it.route == Screens.News.screenName } == true,
-            onClick = { navController.navigate(Screens.News.screenName) },
-            icon = {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_news),
-                    context.getString(R.string.navigation_tab_news)
-                )
-            },
-            label = { Text(context.getString(R.string.navigation_tab_news)) }
-        )
-        BottomNavigationItem(
-            currentDestination?.hierarchy?.any { it.route == Screens.Map.screenName } == true,
-            onClick = { navController.navigate(Screens.Map.screenName) },
-            icon = {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_map),
-                    context.getString(R.string.navigation_tab_map)
-                )
-            },
-            label = { Text(context.getString(R.string.navigation_tab_map)) }
-        )
-        BottomNavigationItem(
-            currentDestination?.hierarchy?.any { it.route == Screens.Settings.screenName } == true,
-            onClick = { navController.navigate(Screens.Settings.screenName) },
-            icon = {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_settings),
-                    context.getString(R.string.navigation_tab_settings)
-                )
-            },
-            label = { Text(context.getString(R.string.navigation_tab_settings)) }
-        )
-    }
+    if (currentDestination?.hierarchy?.any {
+            it.route in listOf(
+                Screens.List.screenName,
+                Screens.News.screenName,
+                Screens.Map.screenName,
+                Screens.Settings.screenName
+            )
+        } == true)
+        BottomNavigation {
+            BottomNavigationItem(
+                currentDestination.hierarchy.any { it.route == Screens.List.screenName },
+                onClick = { navController.navigate(Screens.List.screenName) },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_list),
+                        context.getString(R.string.navigation_tab_list)
+                    )
+                },
+                label = { Text(context.getString(R.string.navigation_tab_list)) }
+            )
+            BottomNavigationItem(
+                currentDestination.hierarchy.any { it.route == Screens.News.screenName },
+                onClick = { navController.navigate(Screens.News.screenName) },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_news),
+                        context.getString(R.string.navigation_tab_news)
+                    )
+                },
+                label = { Text(context.getString(R.string.navigation_tab_news)) }
+            )
+            BottomNavigationItem(
+                currentDestination.hierarchy.any { it.route == Screens.Map.screenName },
+                onClick = { navController.navigate(Screens.Map.screenName) },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_map),
+                        context.getString(R.string.navigation_tab_map)
+                    )
+                },
+                label = { Text(context.getString(R.string.navigation_tab_map)) }
+            )
+            BottomNavigationItem(
+                currentDestination.hierarchy.any { it.route == Screens.Settings.screenName },
+                onClick = { navController.navigate(Screens.Settings.screenName) },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_settings),
+                        context.getString(R.string.navigation_tab_settings)
+                    )
+                },
+                label = { Text(context.getString(R.string.navigation_tab_settings)) }
+            )
+        }
 }

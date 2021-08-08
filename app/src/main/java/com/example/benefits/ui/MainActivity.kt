@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BenefitsTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    Graph(initialScreen = Screens.List)
+                    Graph(initialScreen = Screens.Splash)
                 }
             }
         }
