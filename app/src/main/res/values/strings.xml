@@ -9,4 +9,6 @@
     <string name="shop_name">Магазин</string>
     <string name="cafe_name">Кафе/Ресторан</string>
     <string name="undefined_name">Бездна</string>
+
+    <string name="badge_name">бейдж</string>
 </resources>

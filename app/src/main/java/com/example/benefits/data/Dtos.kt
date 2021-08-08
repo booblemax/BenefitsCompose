@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.benefits.data.converter.AddressConverter
+import com.example.benefits.domain.PromoType
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.domain.models.map
@@ -38,7 +39,7 @@ fun BenefitEntity.toModel() =
         discount,
         discountType,
         promo,
-        description,
+        if (promo.isNotEmpty()) PromoType.WORD else PromoType.BADGE,
         icon
     )
 

@@ -1,5 +1,6 @@
 package com.example.benefits.ui.views
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -21,6 +22,7 @@ import com.example.benefits.R
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.domain.PlaceType
+import com.example.benefits.domain.PromoType
 import com.example.benefits.ui.views.EnumMapper.stringName
 
 @Composable
@@ -40,7 +42,7 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                 painter = painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = null
             )
-            Row(modifier = Modifier.padding(top = 24.dp)) {
+            Row(modifier = Modifier.padding(top = 12.dp)) {
                 Text(
                     modifier = Modifier.padding(start = 12.dp),
                     text = model.name,
@@ -50,7 +52,7 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                 Spacer(modifier = Modifier.weight(1f))
                 DiscountView(text = model.discount)
             }
-            Row {
+            Row(modifier = Modifier.padding(top = 12.dp)) {
                 Text(
                     modifier = Modifier.padding(start = 12.dp),
                     text = stringName(model.type, context),
@@ -58,10 +60,13 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                     color = Color.Gray
                 )
                 Spacer(modifier = Modifier.weight(1f))
-                PromoView(text = model.promo, onClick = {
+                PromoView(
+                    text = model.promoName(context),
+                    onClick = {
                     Toast.makeText(context, "promo clicked ${model.promo}", Toast.LENGTH_SHORT)
                         .show()
-                })
+                    }
+                )
             }
             Description(model.description)
         }
@@ -84,6 +89,12 @@ fun Description(description: String) {
     }
 }
 
+private fun BenefitModel.promoName(context: Context): String =
+    when (promoType) {
+        PromoType.BADGE -> context.getString(R.string.badge_name)
+        PromoType.WORD -> this.promo
+    }
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewBenefitItemView() {
@@ -96,6 +107,7 @@ fun PreviewBenefitItemView() {
             "10-15",
             "",
             "12345",
+            PromoType.WORD,
             "site.com",
             "описаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописаниеописание"
         )

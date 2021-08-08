@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.benefits.domain.models.AddressModel
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.domain.PlaceType
+import com.example.benefits.domain.PromoType
 import com.example.benefits.ui.Resource
 import com.example.benefits.ui.navigation.Screens
 import com.example.benefits.ui.viewmodels.BenefitsViewModel
@@ -61,15 +62,15 @@ fun BenefitsList(items: List<BenefitModel>, onItemClick: (BenefitModel) -> Unit)
 fun Preview() {
     BenefitsList(
         items = listOf(
-            BenefitModel("1", "name1", PlaceType.CAFE, AddressModel("city1", "street1"), "", "","","icon1"),
-            BenefitModel("2", "name2", PlaceType.CAFE, AddressModel("city1", "street1"),  "", "", "", "icon1"),
-            BenefitModel("3", "name3", PlaceType.CAFE, AddressModel("city1", "street1"),  "", "","", "icon1"),
-            BenefitModel("4", "name4", PlaceType.CAFE, AddressModel("city1", "street1"), "", "","", "icon1"),
-            BenefitModel("5", "name5", PlaceType.CAFE, AddressModel("city1", "street1"),  "", "","", "icon1"),
-            BenefitModel("6", "name6", PlaceType.CAFE, AddressModel("city1", "street1"), "", "", "","icon1"),
-            BenefitModel("7", "name7", PlaceType.CAFE, AddressModel("city1", "street1"), "", "", "","icon1"),
-            BenefitModel("8", "name8", PlaceType.CAFE, AddressModel("city1", "street1"), "", "","", "icon1"),
-            BenefitModel("9", "name9", PlaceType.CAFE, AddressModel("city1", "street1"), "", "","","icon1"),
-            BenefitModel("10", "name10", PlaceType.CAFE, AddressModel("city1", "street1"), "", "","","icon1"))
+            BenefitModel("1", "name1", PlaceType.CAFE, AddressModel("city1", "street1"), "", "","", PromoType.BADGE,"icon1"),
+            BenefitModel("2", "name2", PlaceType.CAFE, AddressModel("city1", "street1"),  "", "", "", PromoType.BADGE, "icon1"),
+            BenefitModel("3", "name3", PlaceType.CAFE, AddressModel("city1", "street1"),  "", "","", PromoType.BADGE, "icon1"),
+            BenefitModel("4", "name4", PlaceType.CAFE, AddressModel("city1", "street1"), "", "","", PromoType.BADGE, "icon1"),
+            BenefitModel("5", "name5", PlaceType.CAFE, AddressModel("city1", "street1"),  "", "","", PromoType.BADGE, "icon1"),
+            BenefitModel("6", "name6", PlaceType.CAFE, AddressModel("city1", "street1"), "", "", "", PromoType.BADGE,"icon1"),
+            BenefitModel("7", "name7", PlaceType.CAFE, AddressModel("city1", "street1"), "", "", "", PromoType.BADGE,"icon1"),
+            BenefitModel("8", "name8", PlaceType.CAFE, AddressModel("city1", "street1"), "", "","", PromoType.BADGE, "icon1"),
+            BenefitModel("9", "name9", PlaceType.CAFE, AddressModel("city1", "street1"), "", "","", PromoType.BADGE,"icon1"),
+            BenefitModel("10", "name10", PlaceType.CAFE, AddressModel("city1", "street1"), "", "","", PromoType.BADGE,"icon1"))
     ) {}
 }

@@ -12,3 +12,4 @@ object EnumMapper {
     }
 }
 
+const val EMPTY: String = ""
