@@ -3,10 +3,6 @@
     "id": "1",
     "name": "Гамбринус",
     "type": "cafe",
-    "address": {
-      "city": "Минск",
-      "address": "address"
-    },
     "discount": "10",
     "discountType": "discount",
     "promo": "-1",
@@ -18,10 +14,6 @@
     "id": "2",
     "name": "Додо Пицца",
     "type": "cafe",
-    "address": {
-      "city": "Минск",
-      "address": "address"
-    },
     "discount": "20",
     "discountType": "discount",
     "promo": "34567",
@@ -33,10 +25,6 @@
     "id": "3",
     "name": "Domino's",
     "type": "cafe",
-    "address": {
-      "city": "Минск",
-      "address": "address"
-    },
     "discount": "25",
     "discountType": "discount",
     "promo": "",
@@ -48,15 +36,195 @@
     "id": "4",
     "name": "Garage",
     "type": "cafe",
-    "address": {
-      "city": "Минск",
-      "address": "address"
-    },
     "discount": "5",
     "discountType": "cashback",
     "promo": "",
     "site": "https://www.garage.by/",
     "description": "Корпоративная скидка действует только для зарегестрированных пользователей на сайте или приложении Гараж",
+    "icon": "icon"
+  },
+  {
+    "id": "5",
+    "name": "Hobby Games",
+    "type": "shop",
+    "discount": "15",
+    "discountType": "discount",
+    "promo": "Mb5646642",
+    "site": "https://www.hobbygames.by/",
+    "icon": "icon"
+  },
+  {
+    "id": "6",
+    "name": "Igromaster",
+    "type": "shop",
+    "discount": "10",
+    "discountType": "discount",
+    "promo": "MBICYCLE",
+    "site": "https://www.igromaster.by/",
+    "description": "Для того чтобы воспользоваться скидкой необходимо при заказе озвучить промокод",
+    "icon": "icon"
+  },
+  {
+    "id": "7",
+    "name": "21vek",
+    "type": "shop",
+    "discount": "5-7",
+    "discountType": "discount",
+    "promo": "mbicycle",
+    "site": "https://www.21vek.by/",
+    "description": "7% на товары категорий спорт, красота, детские товары, зоотовары, строительство и ремонт, мебель и интерьер; 5% на все остальное за исключением стоп-брендов",
+    "icon": "icon"
+  },
+  {
+    "id": "8",
+    "name": "Amd",
+    "type": "shop",
+    "discount": "5-15",
+    "discountType": "discount",
+    "promo": "ЮРЛИЦА20",
+    "site": "https://www.amd.by/",
+    "description": "СКИДКИ ВАРЬИРУЮТСЯ, НА КАЖДЫЙ ТОВАРРАЗНАЯ СКИДКА ПРОМОКОД - ЮРЛИЦА20 ЧТОБЫ АКТИВИРОВАТЬ ПРОМОКОД, ЕГО НУЖНО ВВЕСТИ В ПОЛЕ ДЛЯ ПРОМОКОДОВ, И НАЖАТЬ КНОПКУ АКТИВИРОВАТ И ЦЕНЫ НА САЙТЕ БУДУТ ВЫВОДИТСЯ СО СКИДКОЙ",
+    "icon": "icon"
+  },
+  {
+    "id": "9",
+    "name": "Sushi House",
+    "type": "cafe",
+    "discount": "10",
+    "discountType": "discount",
+    "promo": "mbicycle",
+    "site": "https://www.sushihouse.by/",
+    "description": "Промокод для всей компании на доставку и самовывоз",
+    "icon": "icon"
+  },
+  {
+    "id": "10",
+    "name": "Fusion sushi",
+    "type": "cafe",
+    "discount": "15",
+    "discountType": "discount",
+    "promo": "mbicycle",
+    "site": "https://www.fsushi.by/",
+    "description": "Промокод для всей компании на доставку и самовывоз",
+    "icon": "icon"
+  },
+  {
+    "id": "11",
+    "name": "Чистый кит",
+    "type": "service",
+    "discount": "20",
+    "discountType": "discount",
+    "promo": "mbicycle",
+    "site": "https://www.kitt.by/",
+    "description": "Промокод для всей компании на доставку и самовывоз",
+    "icon": "icon"
+  },
+  {
+    "id": "12",
+    "name": "Deadlock",
+    "type": "quest",
+    "discount": "16",
+    "discountType": "discount",
+    "promo": "-1",
+    "site": "https://www.deadlock.by/",
+    "description": "Необходимо предъявить бейдж",
+    "icon": "icon"
+  },
+  {
+    "id": "13",
+    "name": "Black Room",
+    "type": "quest",
+    "discount": "20",
+    "discountType": "discount",
+    "promo": "-1",
+    "site": "https://www.blackroom.by/",
+    "description": "Необходимо предъявить бейдж",
+    "icon": "icon"
+  },
+  {
+    "id": "14",
+    "name": "Gan Bei",
+    "type": "cafe",
+    "discount": "15",
+    "discountType": "discount",
+    "promo": "-1",
+    "site": "https://www.ganbei.by/",
+    "description": "Необходимо предъявить бейдж",
+    "icon": "icon"
+  },
+  {
+    "id": "15",
+    "name": "Hi5",
+    "type": "cafe",
+    "discount": "10",
+    "discountType": "cashback",
+    "promo": "-1",
+    "description": "Необходимо предъявить бейдж",
+    "icon": "icon"
+  },
+  {
+    "id": "16",
+    "name": "Easy Soup",
+    "type": "cafe",
+    "discount": "10",
+    "discountType": "discount",
+    "promo": "mbicycle",
+    "site": "https://www.easysoup.by/",
+    "description": "Промокод для всей компании",
+    "icon": "icon"
+  },
+  {
+    "id": "17",
+    "name": "Gridin Gym",
+    "type": "other",
+    "discount": "10",
+    "discountType": "discount",
+    "promo": "-1",
+    "description": "Скидка действует для всех сотрудников компании",
+    "icon": "icon"
+  },
+  {
+    "id": "18",
+    "name": "ФанЕжа",
+    "type": "cafe",
+    "discount": "15",
+    "discountType": "discount",
+    "promo": "mbicycle15",
+    "site": "https://www.f-e.by/",
+    "description": "Оформить заказ на сайте, в комментарии к заказу написать что есть промокод на скидку от компании Mbicycle, после позвонит менеджер для уточнения заказа, ему назвать промокод",
+    "icon": "icon"
+  },
+  {
+    "id": "19",
+    "name": "Tokiny",
+    "type": "cafe",
+    "discount": "10",
+    "discountType": "discount",
+    "promo": "T-MBICYCLE",
+    "site": "https://www.tokiny.by/",
+    "description": "Действует на доставку, с собой или на месте. Скидка распространяется на основное меню, но не распространяется на алкогольную продукцию, спецпредложения, суши-сеты и обеденные комплексы (ланчи), так как на эти группы цены уже сформированы с учетом скидки.",
+    "icon": "icon"
+  },
+  {
+    "id": "20",
+    "name": "I love Plov",
+    "type": "cafe",
+    "discount": "10",
+    "discountType": "discount",
+    "promo": "t-mbicycle",
+    "site": "https://www.iloveplov.by/",
+    "description": "Действует на доставку, с собой или на месте. Скидка распространяется на основное меню, но не распространяется на алкогольную продукцию, спецпредложения, суши-сеты и обеденные комплексы (ланчи), так как на эти группы цены уже сформированы с учетом скидки.",
+    "icon": "icon"
+  },
+  {
+    "id": "21",
+    "name": "Hunt",
+    "type": "other",
+    "discount": "20",
+    "discountType": "discount",
+    "promo": "-1",
+    "site": "https://www.huntbarbershop.by//",
+    "description": "Необходимо предъявить бейдж",
     "icon": "icon"
   }
 ]
