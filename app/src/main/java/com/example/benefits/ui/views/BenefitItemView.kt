@@ -38,6 +38,7 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(6.dp),
+        elevation = 4.dp
     ) {
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Image(
@@ -52,43 +53,50 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                 contentScale = ContentScale.FillBounds
             )
             Row(modifier = Modifier.padding(top = 12.dp)) {
-                Text(
-                    modifier = Modifier.padding(start = 12.dp),
-                    text = model.name,
-                    style = MaterialTheme.typography.subtitle2,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                DiscountView(
-                    text = model.discount,
-                    modifier = Modifier.padding(top = 4.dp),
-                    textStyle = MaterialTheme.typography.subtitle2
-                )
-            }
-            Row(modifier = Modifier.padding(top = 12.dp)) {
-                Text(
-                    modifier = Modifier.padding(start = 12.dp),
-                    text = stringName(model.type, context),
-                    style = MaterialTheme.typography.h6,
-                    color = Color.Gray
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                PromoView(
-                    text = model.promoName(context),
-                    onClick = { copyPromoInClipboard(context, model.promo) }
-                )
-            }
-            if (model.site.isNotEmpty()) {
-                Text(
-                    modifier =
-                        Modifier
-                            .padding(top = 4.dp, start = 12.dp)
-                            .clickable { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(model.site))) },
-                    text = model.site,
-                    style = MaterialTheme.typography.subtitle2,
-                    color = Color.Gray,
-                    textDecoration = TextDecoration.Underline
-                )
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        modifier = Modifier.padding(start = 12.dp),
+                        text = model.name,
+                        style = MaterialTheme.typography.h5,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        modifier = Modifier.padding(start = 12.dp, top = 8.dp),
+                        text = stringName(model.type, context),
+                        style = MaterialTheme.typography.subtitle2,
+                        color = Color.Gray
+                    )
+                    if (model.site.isNotEmpty()) {
+                        Text(
+                            modifier = Modifier
+                                .padding(top = 4.dp, start = 12.dp)
+                                .apply {
+                                    if (model.promoType == PromoType.WORD) {
+                                        clickable {
+                                            context.startActivity(
+                                                Intent(Intent.ACTION_VIEW, Uri.parse(model.site))
+                                            )
+                                        }
+                                    }
+                                },
+                            text = model.site,
+                            style = MaterialTheme.typography.subtitle2,
+                            color = Color.Gray,
+                            textDecoration = TextDecoration.Underline
+                        )
+                    }
+                }
+                Column(horizontalAlignment = Alignment.End) {
+                    DiscountView(
+                        modifier = Modifier.padding(top = 4.dp),
+                        text = model.discount,
+                        textStyle = MaterialTheme.typography.subtitle2
+                    )
+                    PromoView(
+                        modifier = Modifier.padding(top = 8.dp).clickable { copyPromoInClipboard(context, model.promo) },
+                        text = model.promoName(context)
+                    )
+                }
             }
             Description(model.description)
         }
@@ -113,8 +121,8 @@ fun Description(description: String) {
 
 private fun BenefitModel.promoName(context: Context): String =
     when (promoType) {
-        PromoType.BADGE -> context.getString(R.string.badge_name)
-        PromoType.WORD -> this.promo
+        PromoType.BADGE -> context.getString(R.string.badge_name).uppercase()
+        PromoType.WORD -> this.promo.uppercase()
     }
 
 @Preview(showBackground = true)

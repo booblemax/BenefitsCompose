@@ -1,6 +1,5 @@
 package com.example.benefits.ui.views
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,8 +20,8 @@ fun DiscountView(modifier: Modifier = Modifier, text: String = "", textStyle: Te
 }
 
 @Composable
-fun PromoView(modifier: Modifier = Modifier, text: String, textStyle: TextStyle = LocalTextStyle.current, onClick: () -> Unit) {
-    Cloud(modifier, backgroundColor = Color.Blue, contentColor = Color.White, text = text, textStyle = textStyle, onClick = onClick)
+fun PromoView(modifier: Modifier = Modifier, text: String, textStyle: TextStyle = LocalTextStyle.current) {
+    Cloud(modifier, backgroundColor = Color.Blue, contentColor = Color.White, text = text, textStyle = textStyle)
 }
 
 @Composable
@@ -31,11 +30,10 @@ fun Cloud(
     backgroundColor: Color,
     contentColor: Color,
     text: String,
-    textStyle: TextStyle = LocalTextStyle.current,
-    onClick: () -> Unit = {}
+    textStyle: TextStyle = LocalTextStyle.current
 ) {
     Surface(
-        modifier = modifier.clickable { onClick() },
+        modifier = modifier,
         shape = RoundedCornerShape(12.dp),
         color = backgroundColor,
         contentColor = contentColor
@@ -53,6 +51,6 @@ fun Cloud(
 fun PreviewDiscountView() {
     Column {
         DiscountView(text = "10-15", textStyle = MaterialTheme.typography.h6)
-        PromoView(text = "345678", textStyle = MaterialTheme.typography.h6) {}
+        PromoView(text = "345678", textStyle = MaterialTheme.typography.h6)
     }
 }

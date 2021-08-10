@@ -96,10 +96,7 @@ fun DetailsContent(
                 Spacer(modifier = Modifier.height(12.dp))
                 PromoView(text = model.promo,
                     textStyle = MaterialTheme.typography.h6,
-                    onClick = {
-                        Toast.makeText(context, "promo clicked ${model.promo}", Toast.LENGTH_SHORT)
-                            .show()
-                    })
+                )
             }
         }
         Description(model.description)
