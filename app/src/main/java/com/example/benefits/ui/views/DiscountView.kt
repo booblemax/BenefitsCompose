@@ -4,23 +4,25 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DiscountView(modifier: Modifier = Modifier, text: String = "") {
-    Cloud(modifier, backgroundColor = Color.Yellow, contentColor = Color.Black, text = "$text%")
+fun DiscountView(modifier: Modifier = Modifier, text: String = "", textStyle: TextStyle = LocalTextStyle.current) {
+    Cloud(modifier, backgroundColor = Color.Yellow, contentColor = Color.Black, text = "$text%", textStyle = textStyle)
 }
 
 @Composable
-fun PromoView(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
-    Cloud(modifier, backgroundColor = Color.Blue, contentColor = Color.White, text = text, onClick = onClick)
+fun PromoView(modifier: Modifier = Modifier, text: String, textStyle: TextStyle = LocalTextStyle.current, onClick: () -> Unit) {
+    Cloud(modifier, backgroundColor = Color.Blue, contentColor = Color.White, text = text, textStyle = textStyle, onClick = onClick)
 }
 
 @Composable
@@ -29,6 +31,7 @@ fun Cloud(
     backgroundColor: Color,
     contentColor: Color,
     text: String,
+    textStyle: TextStyle = LocalTextStyle.current,
     onClick: () -> Unit = {}
 ) {
     Surface(
@@ -40,17 +43,16 @@ fun Cloud(
         Text(
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
             text = text,
-            style = MaterialTheme.typography.h6
+            style = textStyle
         )
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewDiscountView() {
     Column {
-        DiscountView(text = "10-15")
-        PromoView(text = "345678") {}
+        DiscountView(text = "10-15", textStyle = MaterialTheme.typography.h6)
+        PromoView(text = "345678", textStyle = MaterialTheme.typography.h6) {}
     }
 }

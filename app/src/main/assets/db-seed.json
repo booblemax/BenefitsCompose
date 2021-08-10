@@ -5,10 +5,10 @@
     "type": "cafe",
     "discount": "10",
     "discountType": "discount",
-    "promo": "-1",
+    "promo": "",
     "site": "https://www.gambrinus.by/",
     "description": "Скидка предоставляется на все меню кухни",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "2",
@@ -19,7 +19,7 @@
     "promo": "34567",
     "site": "https://www.dodopizza.by/",
     "description": "Действует для все сотрудников MBicycle по промокоду",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/48nf6g1/pngegg.png"
   },
   {
     "id": "3",
@@ -30,7 +30,7 @@
     "promo": "",
     "site": "https://www.dominos.by/",
     "description": "Скидка достпуна только для заказа на указанный адрес офиса. Учетная запись mbicyclemin@mail.ru, пароль dominospizza",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/wrg6w50/pngegg-1.png"
   },
   {
     "id": "4",
@@ -41,7 +41,7 @@
     "promo": "",
     "site": "https://www.garage.by/",
     "description": "Корпоративная скидка действует только для зарегестрированных пользователей на сайте или приложении Гараж",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/sWh9CdV/garage-logo-port.png"
   },
   {
     "id": "5",
@@ -51,7 +51,8 @@
     "discountType": "discount",
     "promo": "Mb5646642",
     "site": "https://www.hobbygames.by/",
-    "icon": "icon"
+    "description": "",
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "6",
@@ -62,7 +63,7 @@
     "promo": "MBICYCLE",
     "site": "https://www.igromaster.by/",
     "description": "Для того чтобы воспользоваться скидкой необходимо при заказе озвучить промокод",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "7",
@@ -73,7 +74,7 @@
     "promo": "mbicycle",
     "site": "https://www.21vek.by/",
     "description": "7% на товары категорий спорт, красота, детские товары, зоотовары, строительство и ремонт, мебель и интерьер; 5% на все остальное за исключением стоп-брендов",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "8",
@@ -83,8 +84,8 @@
     "discountType": "discount",
     "promo": "ЮРЛИЦА20",
     "site": "https://www.amd.by/",
-    "description": "СКИДКИ ВАРЬИРУЮТСЯ, НА КАЖДЫЙ ТОВАРРАЗНАЯ СКИДКА ПРОМОКОД - ЮРЛИЦА20 ЧТОБЫ АКТИВИРОВАТЬ ПРОМОКОД, ЕГО НУЖНО ВВЕСТИ В ПОЛЕ ДЛЯ ПРОМОКОДОВ, И НАЖАТЬ КНОПКУ АКТИВИРОВАТ И ЦЕНЫ НА САЙТЕ БУДУТ ВЫВОДИТСЯ СО СКИДКОЙ",
-    "icon": "icon"
+    "description": "Скидки варьируются, на каждый товар разная скидка промокод - ЮРЛИЦА20. Чтобы активировать промокод, его нужно ввести в поле для промокодов и нажать кнопку активировать и цены на сайте будут выводится со скидкой",
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "9",
@@ -95,7 +96,7 @@
     "promo": "mbicycle",
     "site": "https://www.sushihouse.by/",
     "description": "Промокод для всей компании на доставку и самовывоз",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "10",
@@ -106,7 +107,7 @@
     "promo": "mbicycle",
     "site": "https://www.fsushi.by/",
     "description": "Промокод для всей компании на доставку и самовывоз",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "11",
@@ -117,7 +118,7 @@
     "promo": "mbicycle",
     "site": "https://www.kitt.by/",
     "description": "Промокод для всей компании на доставку и самовывоз",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "12",
@@ -128,7 +129,7 @@
     "promo": "-1",
     "site": "https://www.deadlock.by/",
     "description": "Необходимо предъявить бейдж",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "13",
@@ -139,7 +140,7 @@
     "promo": "-1",
     "site": "https://www.blackroom.by/",
     "description": "Необходимо предъявить бейдж",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "14",
@@ -150,7 +151,7 @@
     "promo": "-1",
     "site": "https://www.ganbei.by/",
     "description": "Необходимо предъявить бейдж",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "15",
@@ -159,8 +160,9 @@
     "discount": "10",
     "discountType": "cashback",
     "promo": "-1",
+    "site": "",
     "description": "Необходимо предъявить бейдж",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "16",
@@ -171,7 +173,7 @@
     "promo": "mbicycle",
     "site": "https://www.easysoup.by/",
     "description": "Промокод для всей компании",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "17",
@@ -180,8 +182,9 @@
     "discount": "10",
     "discountType": "discount",
     "promo": "-1",
+    "site": "",
     "description": "Скидка действует для всех сотрудников компании",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "18",
@@ -192,7 +195,7 @@
     "promo": "mbicycle15",
     "site": "https://www.f-e.by/",
     "description": "Оформить заказ на сайте, в комментарии к заказу написать что есть промокод на скидку от компании Mbicycle, после позвонит менеджер для уточнения заказа, ему назвать промокод",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "19",
@@ -203,7 +206,7 @@
     "promo": "T-MBICYCLE",
     "site": "https://www.tokiny.by/",
     "description": "Действует на доставку, с собой или на месте. Скидка распространяется на основное меню, но не распространяется на алкогольную продукцию, спецпредложения, суши-сеты и обеденные комплексы (ланчи), так как на эти группы цены уже сформированы с учетом скидки.",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "20",
@@ -214,7 +217,7 @@
     "promo": "t-mbicycle",
     "site": "https://www.iloveplov.by/",
     "description": "Действует на доставку, с собой или на месте. Скидка распространяется на основное меню, но не распространяется на алкогольную продукцию, спецпредложения, суши-сеты и обеденные комплексы (ланчи), так как на эти группы цены уже сформированы с учетом скидки.",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   },
   {
     "id": "21",
@@ -225,6 +228,6 @@
     "promo": "-1",
     "site": "https://www.huntbarbershop.by//",
     "description": "Необходимо предъявить бейдж",
-    "icon": "icon"
+    "icon": "https://i.ibb.co/cYL4Z7V/Gambrinus-logo.png"
   }
 ]

@@ -16,7 +16,8 @@ class DbInitializer(
             val isFirstLaunch = sharedPreferences.getBoolean(FIRST_LAUNCH_KEY, false)
 
             if (!isFirstLaunch) {
-                repository.saveBenefits(extractor.loadDataFromJson(context))
+                val benefits = extractor.loadDataFromJson(context)
+                repository.saveBenefits(benefits)
                 sharedPreferences.edit {
                     putBoolean(FIRST_LAUNCH_KEY, true)
                 }

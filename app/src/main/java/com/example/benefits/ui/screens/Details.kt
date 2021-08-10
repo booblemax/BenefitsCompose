@@ -84,10 +84,6 @@ fun DetailsContent(
                     style = MaterialTheme.typography.h4
                 )
                 Text(
-                    text = model.address.toString(),
-                    style = MaterialTheme.typography.subtitle1
-                )
-                Text(
                     text = stringName(model.type, context),
                     style = MaterialTheme.typography.body2
                 )
@@ -96,12 +92,14 @@ fun DetailsContent(
                 horizontalAlignment = Alignment.End,
             ) {
                 Spacer(modifier = Modifier.height(12.dp))
-                DiscountView(text = model.discount)
+                DiscountView(text = model.discount, textStyle = MaterialTheme.typography.h6)
                 Spacer(modifier = Modifier.height(12.dp))
-                PromoView(text = model.promo, onClick = {
-                    Toast.makeText(context, "promo clicked ${model.promo}", Toast.LENGTH_SHORT)
-                        .show()
-                })
+                PromoView(text = model.promo,
+                    textStyle = MaterialTheme.typography.h6,
+                    onClick = {
+                        Toast.makeText(context, "promo clicked ${model.promo}", Toast.LENGTH_SHORT)
+                            .show()
+                    })
             }
         }
         Description(model.description)

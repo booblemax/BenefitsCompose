@@ -10,7 +10,6 @@ data class BenefitModel(
     val id: String = "",
     val name: String = "",
     val type: PlaceType = PlaceType.OTHER,
-    val address: AddressModel = AddressModel(),
     val discount: String = "",
     val discountType: String = "",
     val promo: String = "",
@@ -19,15 +18,6 @@ data class BenefitModel(
     val description: String = "",
     val icon: String = ""
 ) : Parcelable
-
-@Parcelize
-data class AddressModel(
-    val city: String = "",
-    val street: String = ""
-) : Parcelable {
-
-    override fun toString(): String = "$city, $street"
-}
 
 internal fun String.map() =
     when (this) {

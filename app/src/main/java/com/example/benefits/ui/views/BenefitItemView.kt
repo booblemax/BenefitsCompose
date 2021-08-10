@@ -17,18 +17,19 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import com.example.benefits.R
-import com.example.benefits.domain.models.AddressModel
-import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.domain.PlaceType
 import com.example.benefits.domain.PromoType
+import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.views.EnumMapper.stringName
 
 @Composable
@@ -43,20 +44,26 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth()
+                    .clip(RoundedCornerShape(16.dp))
                     .height(210.dp)
                     .padding(top = 12.dp),
-                painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = null
+                painter = rememberImagePainter(model.icon),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds
             )
             Row(modifier = Modifier.padding(top = 12.dp)) {
                 Text(
                     modifier = Modifier.padding(start = 12.dp),
                     text = model.name,
-                    style = MaterialTheme.typography.h5,
+                    style = MaterialTheme.typography.subtitle2,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.weight(1f))
-                DiscountView(text = model.discount)
+                DiscountView(
+                    text = model.discount,
+                    modifier = Modifier.padding(top = 4.dp),
+                    textStyle = MaterialTheme.typography.subtitle2
+                )
             }
             Row(modifier = Modifier.padding(top = 12.dp)) {
                 Text(
@@ -118,7 +125,6 @@ fun PreviewBenefitItemView() {
             "1",
             "name1",
             PlaceType.SHOP,
-            AddressModel("city1", "street1"),
             "10-15",
             "",
             "12345",
