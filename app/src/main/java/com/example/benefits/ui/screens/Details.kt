@@ -1,15 +1,8 @@
 package com.example.benefits.ui.screens
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -24,14 +17,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.benefits.R
 import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.Resource
 import com.example.benefits.ui.navigation.Screens
 import com.example.benefits.ui.viewmodels.DetailsViewModel
-import com.example.benefits.ui.views.*
+import com.example.benefits.ui.views.DiscountView
 import com.example.benefits.ui.views.EnumMapper.stringName
+import com.example.benefits.ui.views.ErrorView
+import com.example.benefits.ui.views.Loading
+import com.example.benefits.ui.views.PromoView
 import org.koin.androidx.compose.getViewModel
 
 @Composable

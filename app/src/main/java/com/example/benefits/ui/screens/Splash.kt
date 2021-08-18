@@ -29,7 +29,7 @@ fun Splash(navigateTo: (String) -> Unit) {
 
     LaunchedEffect(Screens.Splash) {
         delay(2000L)
-        navigateTo(Screens.List.screenName)
+        navigateTo(Screens.HomeScreens.List.screenName)
     }
 }
 

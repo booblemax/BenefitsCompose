@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 
 @Composable
-fun Settings() {
+fun Card() {
     Box(contentAlignment = Alignment.Center){
         Text(text = "Not implemented yet")
     }

@@ -5,8 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import com.example.benefits.ui.navigation.Graph
+import com.example.benefits.ui.navigation.NavGraph
 import com.example.benefits.ui.navigation.Screens
+import com.example.benefits.ui.screens.BenefitsApp
 import com.example.benefits.ui.theme.BenefitsTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BenefitsTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    Graph(initialScreen = Screens.Splash)
+                    BenefitsApp()
                 }
             }
         }

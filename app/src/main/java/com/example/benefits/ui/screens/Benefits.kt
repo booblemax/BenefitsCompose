@@ -38,7 +38,7 @@ fun Benefits(navigateTo: (String) -> Unit) {
         }
     }
 
-    LaunchedEffect(key1 = Screens.List) {
+    LaunchedEffect(key1 = Screens.HomeScreens.List) {
         viewModel.loadData()
     }
 }

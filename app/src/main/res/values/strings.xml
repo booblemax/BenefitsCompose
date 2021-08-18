@@ -4,7 +4,7 @@
     <string name="navigation_tab_list">Список</string>
     <string name="navigation_tab_map">Карта</string>
     <string name="navigation_tab_news">Новости</string>
-    <string name="navigation_tab_settings">Настройки</string>
+    <string name="navigation_tab_card">Бейдж</string>
 
     <string name="shop_name">Магазин</string>
     <string name="cafe_name">Кафе/Ресторан</string>
