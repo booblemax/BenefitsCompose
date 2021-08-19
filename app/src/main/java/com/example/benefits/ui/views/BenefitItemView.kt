@@ -82,7 +82,8 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                             text = model.site,
                             style = MaterialTheme.typography.subtitle2,
                             color = Color.Gray,
-                            textDecoration = TextDecoration.Underline
+                            textDecoration = TextDecoration.Underline,
+                            softWrap = false
                         )
                     }
                 }
@@ -93,12 +94,14 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                         textStyle = MaterialTheme.typography.subtitle2
                     )
                     PromoView(
-                        modifier = Modifier.padding(top = 8.dp).clickable { copyPromoInClipboard(context, model.promo) },
+                        modifier = Modifier
+                            .padding(top = 8.dp)
+                            .clickable { copyPromoInClipboard(context, model.promo) },
                         text = model.promoName(context)
                     )
                 }
             }
-            Description(model.description)
+            if (model.description.isNotEmpty()) Description(model.description)
         }
     }
 }

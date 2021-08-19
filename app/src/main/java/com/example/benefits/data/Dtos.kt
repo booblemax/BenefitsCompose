@@ -28,7 +28,7 @@ fun BenefitEntity.toModel() =
         discount,
         discountType,
         promo,
-        if (promo.isNotEmpty()) PromoType.WORD else PromoType.BADGE,
+        if (promo.isNotEmpty() && promo != "-1") PromoType.WORD else PromoType.BADGE,
         site,
         description,
         icon
