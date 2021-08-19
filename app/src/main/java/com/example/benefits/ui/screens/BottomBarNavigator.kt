@@ -2,6 +2,8 @@ package com.example.benefits.ui.screens
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -15,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.*
 import androidx.compose.ui.res.painterResource
@@ -67,23 +70,6 @@ private fun BenefitsBottomNavBar(
     onClick: (String) -> Unit
 ) {
     BottomNavigation {
-//        val screen = HomeScreen.LIST
-//        BottomNavigationItem(
-//            selected = false,
-//            icon = {
-//                Image(
-//                    painter = painterResource(id = screen.iconId),
-//                    contentDescription = stringResource(screen.titleId)
-//                )
-//            },
-//            label = {
-//                Text(
-//                    text = stringResource(screen.titleId).uppercase(),
-//                    fontWeight = FontWeight.Bold
-//                )
-//            },
-//            onClick = {}
-//        )
         items.forEach { screen ->
             BottomNavItem(
                 screen.route == selectedScreenRoute,
@@ -130,28 +116,54 @@ private fun RowScope.BottomNavItem(
             .weight(1f),
         contentAlignment = Alignment.Center
     ) {
-        if (isSelected) SelectedBottomNavItem(icon, styledLabel)
-        else UnselectedBottomNavItem(icon)
+        BottomNavItemTransition(isSelected) { progressAnimationValue, textAnimationValue ->
+            SelecteableBottomNavItem(
+                isSelected,
+                icon,
+                styledLabel,
+                progressAnimationValue,
+                textAnimationValue
+            )
+        }
     }
 }
 
+@Composable
+private fun BottomNavItemTransition(
+    isSelected: Boolean,
+    content: @Composable (colorAnimationProgress: Float, textAnimationProgress: Float) -> Unit
+) {
+    val progressAnimationState = animateFloatAsState(
+        targetValue = if (isSelected) 1f else 0f,
+        BenefitsBottomNavItemProgressAnimationSpec
+    )
+
+    val textAnimationState = animateFloatAsState(
+        targetValue = if (isSelected) 1f else 0f,
+        BenefitsBottomNavItemTextAnimationSpec
+    )
+
+    content(progressAnimationState.value, textAnimationState.value)
+}
 
 @Composable
-private fun SelectedBottomNavItem(
+private fun SelecteableBottomNavItem(
+    isSelected: Boolean,
     icon: @Composable () -> Unit,
-    text: @Composable () -> Unit
+    text: @Composable () -> Unit,
+    progressAnimationValue: Float,
+    textAnimationValue: Float,
 ) {
     Surface(
         modifier = Modifier.padding(PaddingValue),
         color = MaterialTheme.colors.primary,
         shape = RoundedCornerShape(50),
-        border = BorderStroke(BorderWidth, Color.White)
+        border = BorderStroke(BorderWidth, Color.White.copy(alpha = progressAnimationValue))
     ) {
         Layout(
-            modifier = Modifier.fillMaxHeight(),
             content = {
                 Box(modifier = Modifier.layoutId("icon")) { icon() }
-                Box(modifier = Modifier.layoutId("text")) { text() }
+                Box(modifier = Modifier.layoutId("text").alpha(textAnimationValue)) { text() }
             }
         ) { measureable, constraints ->
             val iconPlaceable = measureable.first { it.layoutId == "icon" }.measure(constraints.copy(minHeight = 0))
@@ -159,19 +171,10 @@ private fun SelectedBottomNavItem(
             placeIconAndText(
                 icon = iconPlaceable,
                 label = labelPlaceable,
-                constraints = constraints
+                constraints = constraints,
+                isSelected = isSelected
             )
         }
-    }
-}
-
-@Composable
-private fun UnselectedBottomNavItem(icon: @Composable () -> Unit) {
-    Layout(
-        content = { Box(modifier = Modifier.layoutId("icon")) { icon() } }
-    ) { measureable, constraints ->
-        val iconPlaceable = measureable.first { it.layoutId == "icon" }.measure(constraints)
-        placeIcon(iconPlaceable, constraints)
     }
 }
 
@@ -193,7 +196,8 @@ private fun MeasureScope.placeIcon(
 private fun MeasureScope.placeIconAndText(
     icon: Placeable,
     label: Placeable,
-    constraints: Constraints
+    constraints: Constraints,
+    isSelected: Boolean
 ): MeasureResult {
     val height = constraints.maxHeight
     val width = constraints.maxWidth
@@ -208,8 +212,13 @@ private fun MeasureScope.placeIconAndText(
     // Selected label should be placed at same line with icon
     val labelY = iconY + (iconHeight - labelHeight) / 2
 
-    val iconX = (width - (iconWidth + labelWidth)) / 2
-    val labelX = iconX + iconWidth
+    val iconX = if (isSelected) {
+        (width - (iconWidth + labelWidth)) / 2
+    } else {
+        (width - icon.width) / 2
+    }
+
+    val labelX = ((width - (iconWidth + labelWidth)) / 2) + iconWidth
 
     return layout(width, height) {
         icon.placeRelative(iconX, iconY)
@@ -217,9 +226,11 @@ private fun MeasureScope.placeIconAndText(
     }
 }
 
-private val DefaultOffset = 12.dp
 private val PaddingValue = 8.dp
 private val BorderWidth = 2.dp
+private val BenefitsBottomNavItemProgressAnimationSpec = TweenSpec<Float>(durationMillis = 250)
+private val BenefitsBottomNavItemTextAnimationSpec = TweenSpec<Float>(durationMillis = 50)
+
 
 @Preview(showSystemUi = true)
 @Composable
