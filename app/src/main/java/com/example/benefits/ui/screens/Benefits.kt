@@ -18,7 +18,6 @@ import com.example.benefits.ui.navigation.Screens
 import com.example.benefits.ui.viewmodels.BenefitsViewModel
 import com.example.benefits.ui.views.BenefitItem
 import com.example.benefits.ui.views.ErrorView
-import com.example.benefits.ui.views.Loading
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -29,9 +28,10 @@ fun Benefits(navigateTo: (String) -> Unit) {
     Column {
         TopAppBar(title = { Text(text = "Benefits") })
         when (val value = benefitsState.value) {
-            is Resource.Loading -> Loading()
+            is Resource.Loading ->
+                BenefitsList(true, listOf(BenefitModel(), BenefitModel(), BenefitModel(), BenefitModel(), BenefitModel())) { navigateTo(Screens.Details.createRoute(it.id)) }
             is Resource.Success<List<BenefitModel>> ->
-                BenefitsList(value.data) { navigateTo(Screens.Details.createRoute(it.id)) }
+                BenefitsList(false, value.data) { navigateTo(Screens.Details.createRoute(it.id)) }
             is Resource.Error -> ErrorView(error = value.error) {
                 viewModel.loadData()
             }
@@ -44,12 +44,12 @@ fun Benefits(navigateTo: (String) -> Unit) {
 }
 
 @Composable
-fun BenefitsList(items: List<BenefitModel>, onItemClick: (BenefitModel) -> Unit) {
+fun BenefitsList(isLoading: Boolean, items: List<BenefitModel>, onItemClick: (BenefitModel) -> Unit) {
     LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
         items(items.size, { items[it].id }) { index ->
             val item = items[index]
             Spacer(modifier = Modifier.height(8.dp))
-            BenefitItem(model = item) {
+            BenefitItem(model = item, isLoading = isLoading) {
                 onItemClick(item)
             }
         }
@@ -60,6 +60,7 @@ fun BenefitsList(items: List<BenefitModel>, onItemClick: (BenefitModel) -> Unit)
 @Composable
 fun Preview() {
     BenefitsList(
+        false,
         items = listOf(
             BenefitModel("1", "name1", PlaceType.CAFE, "", "","", PromoType.BADGE,"icon1"),
             BenefitModel("2", "name2", PlaceType.CAFE,  "", "", "", PromoType.BADGE, "icon1"),

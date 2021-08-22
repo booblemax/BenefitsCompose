@@ -4,10 +4,11 @@ import android.os.Parcelable
 import com.example.benefits.domain.PlaceType
 import com.example.benefits.domain.PromoType
 import kotlinx.parcelize.Parcelize
+import java.util.*
 
 @Parcelize
 data class BenefitModel(
-    val id: String = "",
+    val id: String = UUID.randomUUID().toString(),
     val name: String = "",
     val type: PlaceType = PlaceType.OTHER,
     val discount: String = "",

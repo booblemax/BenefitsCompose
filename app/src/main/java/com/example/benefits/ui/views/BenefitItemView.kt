@@ -33,7 +33,12 @@ import com.example.benefits.domain.models.BenefitModel
 import com.example.benefits.ui.views.EnumMapper.stringName
 
 @Composable
-fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicked: () -> Unit) {
+fun BenefitItem(
+    modifier: Modifier = Modifier,
+    model: BenefitModel,
+    isLoading: Boolean,
+    onItemClicked: () -> Unit
+) {
     val context = LocalContext.current
     Card(
         modifier = modifier,
@@ -47,7 +52,8 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(16.dp))
                     .height(210.dp)
-                    .padding(top = 12.dp),
+                    .padding(top = 12.dp)
+                    .loadingShimmer(isLoading),
                 painter = rememberImagePainter(model.icon),
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds
@@ -55,13 +61,17 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
             Row(modifier = Modifier.padding(top = 12.dp)) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        modifier = Modifier.padding(start = 12.dp),
+                        modifier = Modifier.padding(start = 12.dp, end = 8.dp)
+                            .fillMaxWidth()
+                            .loadingShimmer(isLoading),
                         text = model.name,
                         style = MaterialTheme.typography.h5,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        modifier = Modifier.padding(start = 12.dp, top = 8.dp),
+                        modifier = Modifier.padding(start = 12.dp, top = 8.dp, end = 8.dp)
+                            .fillMaxWidth()
+                            .loadingShimmer(isLoading),
                         text = stringName(model.type, context),
                         style = MaterialTheme.typography.subtitle2,
                         color = Color.Gray
@@ -69,7 +79,9 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                     if (model.site.isNotEmpty()) {
                         Text(
                             modifier = Modifier
-                                .padding(top = 4.dp, start = 12.dp)
+                                .padding(top = 4.dp, start = 12.dp, end = 8.dp)
+                                .fillMaxWidth()
+                                .loadingShimmer(isLoading)
                                 .apply {
                                     if (model.promoType == PromoType.WORD) {
                                         clickable {
@@ -89,29 +101,32 @@ fun BenefitItem(modifier: Modifier = Modifier, model: BenefitModel, onItemClicke
                 }
                 Column(horizontalAlignment = Alignment.End) {
                     DiscountView(
-                        modifier = Modifier.padding(top = 4.dp),
+                        modifier = Modifier.padding(top = 4.dp, end = 12.dp)
+                            .loadingShimmer(isLoading),
                         text = model.discount,
                         textStyle = MaterialTheme.typography.subtitle2
                     )
                     PromoView(
                         modifier = Modifier
-                            .padding(top = 8.dp)
-                            .clickable { copyPromoInClipboard(context, model.promo) },
+                            .padding(top = 8.dp, end = 12.dp)
+                            .clickable { copyPromoInClipboard(context, model.promo) }
+                            .loadingShimmer(isLoading),
                         text = model.promoName(context)
                     )
                 }
             }
-            if (model.description.isNotEmpty()) Description(model.description)
+            if (model.description.isNotEmpty() || isLoading) Description(isLoading, model.description)
         }
     }
 }
 
 @Composable
-fun Description(description: String) {
+fun Description(isLoading: Boolean, description: String) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp),
+            .padding(vertical = 12.dp)
+            .loadingShimmer(isLoading),
         color = Color.LightGray,
         shape = RoundedCornerShape(6.dp)
     ) {
@@ -132,6 +147,7 @@ private fun BenefitModel.promoName(context: Context): String =
 @Composable
 fun PreviewBenefitItemView() {
     BenefitItem(
+        isLoading = true,
         model = BenefitModel(
             "1",
             "name1",
