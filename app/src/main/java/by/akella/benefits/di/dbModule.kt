@@ -1,8 +1,6 @@
 package by.akella.benefits.di
 
 import androidx.room.Room
-import by.akella.benefits.data.DbInitializer
-import by.akella.benefits.data.JsonDataExtractor
 import by.akella.benefits.data.datasource.local.db.BenefitsDb
 import by.akella.benefits.data.datasource.remote.RemoteDataApi
 import by.akella.benefits.data.datasource.remote.RemoteDataApiImpl
@@ -21,8 +19,4 @@ val dataModule = module {
     factory<RemoteDataApi> { RemoteDataApiImpl(get()) }
 
     factory { get<BenefitsDb>().benefitsDao }
-
-    factory { DbInitializer(get(), get(), get()) }
-
-    factory { JsonDataExtractor() }
 }

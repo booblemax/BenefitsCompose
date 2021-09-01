@@ -7,23 +7,23 @@ import com.google.gson.annotations.SerializedName
 
 data class BenefitsResponse(
     @SerializedName("id")
-    val id: String,
+    val id: String = "",
     @SerializedName("name")
-    val name: String,
+    val name: String = "",
     @SerializedName("type")
-    val type: String,
+    val type: String = "",
     @SerializedName("discount")
-    val discount: String,
+    val discount: String = "",
     @SerializedName("discountType")
-    val discountType: String,
+    val discountType: String = "",
     @SerializedName("promo")
-    val promo: String,
+    val promo: String = "",
     @SerializedName("site")
-    val site: String,
+    val site: String = "",
     @SerializedName("description")
-    val description: String,
+    val description: String = "",
     @SerializedName("icon")
-    val icon: String
+    val icon: String = ""
 )
 
 fun BenefitsResponse.toModel() =

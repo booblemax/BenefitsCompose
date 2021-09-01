@@ -24,7 +24,6 @@ class BenefitsViewModel(
     fun loadData() {
         scope.launch {
             mBenefitsState.emit(Resource.Loading)
-            delay(2000L)
             repo.getBenefitList(true)
                 .catch {
                     mBenefitsState.emit(

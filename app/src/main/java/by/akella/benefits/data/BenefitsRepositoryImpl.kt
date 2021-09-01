@@ -7,17 +7,17 @@ import by.akella.benefits.data.datasource.remote.RemoteDataApi
 import by.akella.benefits.data.datasource.remote.toModel
 import by.akella.benefits.domain.BenefitsRepository
 import by.akella.benefits.domain.models.BenefitModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class BenefitsRepositoryImpl(
     private val remoteDataApi: RemoteDataApi,
     private val benefitsDao: BenefitsDao
 ) : BenefitsRepository {
 
-    override fun saveBenefits(benefits: List<BenefitModel>) {
+    override suspend fun saveBenefits(benefits: List<BenefitModel>) {
         benefitsDao.insert(*benefits.map { it.toEntity() }.toTypedArray())
     }
 
@@ -25,12 +25,14 @@ class BenefitsRepositoryImpl(
         if (force)
             remoteDataApi.getBenefits()
                 .map { models ->
-                    models.map { it.toModel() }.also { saveBenefits(it) }
+                    val mapped = models.map { it.toModel() }
+                    saveBenefits(mapped)
+                    mapped
                 }
+                .flowOn(Dispatchers.IO)
                 .catch {
-                    emitAll(
-                        benefitsDao.getAll().map { models -> models.map { it.toModel() } }
-                    )
+                    Timber.e(it)
+                    emitAll(benefitsDao.getAll().map { models -> models.map { it.toModel() } })
                 }
         else
             benefitsDao.getAll()
