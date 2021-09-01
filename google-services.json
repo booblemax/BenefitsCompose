@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "3105844570",
+    "firebase_url": "https://mbicyclebenefits-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "mbicyclebenefits",
+    "storage_bucket": "mbicyclebenefits.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3105844570:android:60596c5ef6a1d781a19763",
+        "android_client_info": {
+          "package_name": "by.akella.benefits"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3105844570-b5046kmfutdfjkr6m802962dmodm1n77.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpHjGc8dlp8gO0SYvvJ9QxyGlxMOXk6JA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3105844570-b5046kmfutdfjkr6m802962dmodm1n77.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
