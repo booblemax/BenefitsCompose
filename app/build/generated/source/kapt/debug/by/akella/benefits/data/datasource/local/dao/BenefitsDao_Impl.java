@@ -1,6 +1,7 @@
 package by.akella.benefits.data.datasource.local.dao;
 
 import android.database.Cursor;
+import android.os.CancellationSignal;
 import androidx.room.CoroutinesRoom;
 import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
@@ -12,6 +13,7 @@ import androidx.sqlite.db.SupportSQLiteStatement;
 import by.akella.benefits.data.datasource.local.BenefitEntity;
 import java.lang.Class;
 import java.lang.Exception;
+import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -19,7 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
-import kotlinx.coroutines.flow.Flow;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
 
 @SuppressWarnings({"unchecked", "deprecation"})
 public final class BenefitsDao_Impl implements BenefitsDao {
@@ -34,7 +37,7 @@ public final class BenefitsDao_Impl implements BenefitsDao {
     this.__insertionAdapterOfBenefitEntity = new EntityInsertionAdapter<BenefitEntity>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR ABORT INTO `benefits` (`id`,`name`,`type`,`discount`,`discountType`,`promo`,`site`,`description`,`icon`) VALUES (?,?,?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `benefits` (`id`,`name`,`type`,`discount`,`discountType`,`promo`,`site`,`description`,`icon`) VALUES (?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -104,34 +107,47 @@ public final class BenefitsDao_Impl implements BenefitsDao {
   }
 
   @Override
-  public void insert(final BenefitEntity... models) {
-    __db.assertNotSuspendingTransaction();
-    __db.beginTransaction();
-    try {
-      __insertionAdapterOfBenefitEntity.insert(models);
-      __db.setTransactionSuccessful();
-    } finally {
-      __db.endTransaction();
-    }
+  public Object insert(final BenefitEntity[] models,
+      final Continuation<? super Unit> continuation) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __insertionAdapterOfBenefitEntity.insert(models);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, continuation);
   }
 
   @Override
-  public void delete(final BenefitEntity... models) {
-    __db.assertNotSuspendingTransaction();
-    __db.beginTransaction();
-    try {
-      __deletionAdapterOfBenefitEntity.handleMultiple(models);
-      __db.setTransactionSuccessful();
-    } finally {
-      __db.endTransaction();
-    }
+  public Object delete(final BenefitEntity[] models,
+      final Continuation<? super Unit> continuation) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __deletionAdapterOfBenefitEntity.handleMultiple(models);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, continuation);
   }
 
   @Override
-  public Flow<List<BenefitEntity>> getAll() {
+  public Object getAll(final Continuation<? super List<BenefitEntity>> continuation) {
     final String _sql = "SELECT * FROM benefits";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return CoroutinesRoom.createFlow(__db, false, new String[]{"benefits"}, new Callable<List<BenefitEntity>>() {
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<BenefitEntity>>() {
       @Override
       public List<BenefitEntity> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
@@ -208,18 +224,14 @@ public final class BenefitsDao_Impl implements BenefitsDao {
           return _result;
         } finally {
           _cursor.close();
+          _statement.release();
         }
       }
-
-      @Override
-      protected void finalize() {
-        _statement.release();
-      }
-    });
+    }, continuation);
   }
 
   @Override
-  public Flow<BenefitEntity> getById(final String id) {
+  public Object getById(final String id, final Continuation<? super BenefitEntity> continuation) {
     final String _sql = "SELECT * FROM benefits WHERE id = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -228,7 +240,8 @@ public final class BenefitsDao_Impl implements BenefitsDao {
     } else {
       _statement.bindString(_argIndex, id);
     }
-    return CoroutinesRoom.createFlow(__db, false, new String[]{"benefits"}, new Callable<BenefitEntity>() {
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<BenefitEntity>() {
       @Override
       public BenefitEntity call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
@@ -305,14 +318,10 @@ public final class BenefitsDao_Impl implements BenefitsDao {
           return _result;
         } finally {
           _cursor.close();
+          _statement.release();
         }
       }
-
-      @Override
-      protected void finalize() {
-        _statement.release();
-      }
-    });
+    }, continuation);
   }
 
   public static List<Class<?>> getRequiredConverters() {

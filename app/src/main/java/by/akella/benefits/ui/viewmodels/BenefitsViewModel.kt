@@ -23,15 +23,16 @@ class BenefitsViewModel(
 
     fun loadData() {
         scope.launch {
-            mBenefitsState.emit(Resource.Loading)
             repo.getBenefitList(true)
+                .flowOn(Dispatchers.IO)
+                .onStart { mBenefitsState.emit(Resource.Loading) }
+                .onEach { mBenefitsState.emit(Resource.Success(it)) }
                 .catch {
                     mBenefitsState.emit(
                         Resource.Error(CommonError("error while loading benefits", it))
                     )
-                }.collect {
-                    mBenefitsState.emit(Resource.Success(it))
                 }
+                .launchIn(scope)
         }
     }
 }

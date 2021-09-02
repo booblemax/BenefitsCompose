@@ -21,23 +21,16 @@ class BenefitsRepositoryImpl(
         benefitsDao.insert(*benefits.map { it.toEntity() }.toTypedArray())
     }
 
-    override fun getBenefitList(force: Boolean): Flow<List<BenefitModel>> =
-        if (force)
-            remoteDataApi.getBenefits()
-                .map { models ->
-                    val mapped = models.map { it.toModel() }
-                    saveBenefits(mapped)
-                    mapped
-                }
-                .flowOn(Dispatchers.IO)
-                .catch {
-                    Timber.e(it)
-                    emitAll(benefitsDao.getAll().map { models -> models.map { it.toModel() } })
-                }
-        else
-            benefitsDao.getAll()
-                .map { models -> models.map { it.toModel() } }
+    override fun getBenefitList(force: Boolean): Flow<List<BenefitModel>> = flow {
+        if (force) {
+            val benefitsModels = remoteDataApi.getBenefits().map { it.toModel() }
+            emit(benefitsModels)
+            saveBenefits(benefitsModels)
+        } else benefitsDao.getAll().map { it.toModel() }
+    }
 
-    override fun getBenefit(id: String): Flow<BenefitModel> =
-            benefitsDao.getById(id).map { it.toModel() }
+    override fun getBenefit(id: String): Flow<BenefitModel> = flow {
+        val model = benefitsDao.getById(id).toModel()
+        emit(model)
+    }
 }

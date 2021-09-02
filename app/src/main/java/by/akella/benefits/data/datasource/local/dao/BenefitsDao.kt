@@ -1,24 +1,21 @@
 package by.akella.benefits.data.datasource.local.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import by.akella.benefits.data.datasource.local.BenefitEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BenefitsDao {
 
-    @Insert
-    fun insert(vararg models: BenefitEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(vararg models: BenefitEntity)
 
     @Delete
-    fun delete(vararg models: BenefitEntity)
+    suspend fun delete(vararg models: BenefitEntity)
 
     @Query("SELECT * FROM benefits")
-    fun getAll(): Flow<List<BenefitEntity>>
+    suspend fun getAll(): List<BenefitEntity>
 
     @Query("SELECT * FROM benefits WHERE id = :id")
-    fun getById(id: String): Flow<BenefitEntity>
+    suspend fun getById(id: String): BenefitEntity
 }

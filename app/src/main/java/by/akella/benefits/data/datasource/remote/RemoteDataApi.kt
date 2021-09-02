@@ -8,15 +8,15 @@ import kotlin.coroutines.resumeWithException
 
 interface RemoteDataApi {
 
-    fun getBenefits(): Flow<List<BenefitsResponse>>
+    suspend fun getBenefits(): List<BenefitsResponse>
 }
 
 class RemoteDataApiImpl(
     private val db: FirebaseDatabase
 ) : RemoteDataApi {
 
-    override fun getBenefits(): Flow<List<BenefitsResponse>> = flow {
-        val result = suspendCancellableCoroutine<List<BenefitsResponse>> { continuation ->
+    override suspend fun getBenefits(): List<BenefitsResponse> =
+        suspendCancellableCoroutine { continuation ->
             db.reference.child("benefits").get()
                 .addOnSuccessListener { result ->
                     if (result.exists()) {
@@ -27,6 +27,4 @@ class RemoteDataApiImpl(
                 }
                 .addOnFailureListener { fail -> continuation.resumeWithException(fail) }
         }
-        emit(result)
-    }
 }
