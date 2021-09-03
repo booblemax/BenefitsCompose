@@ -23,9 +23,13 @@ class BenefitsRepositoryImpl(
 
     override fun getBenefitList(force: Boolean): Flow<List<BenefitModel>> = flow {
         if (force) {
-            val benefitsModels = remoteDataApi.getBenefits().map { it.toModel() }
-            emit(benefitsModels)
-            saveBenefits(benefitsModels)
+            try {
+                val benefitsModels = remoteDataApi.getBenefits().map { it.toModel() }
+                emit(benefitsModels)
+                saveBenefits(benefitsModels)
+            } catch (e: Exception) {
+                emit(benefitsDao.getAll().map { it.toModel() })
+            }
         } else benefitsDao.getAll().map { it.toModel() }
     }
 
