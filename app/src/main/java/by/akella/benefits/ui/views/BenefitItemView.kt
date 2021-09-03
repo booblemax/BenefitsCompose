@@ -31,7 +31,9 @@ import by.akella.benefits.domain.PlaceType
 import by.akella.benefits.domain.PromoType
 import by.akella.benefits.domain.models.BenefitModel
 import by.akella.benefits.ui.views.EnumMapper.stringName
+import coil.annotation.ExperimentalCoilApi
 
+@ExperimentalCoilApi
 @Composable
 fun BenefitItem(
     modifier: Modifier = Modifier,
@@ -54,9 +56,13 @@ fun BenefitItem(
                     .height(210.dp)
                     .padding(top = 12.dp)
                     .loadingShimmer(isLoading),
-                painter = rememberImagePainter(model.icon),
+                painter = rememberImagePainter(model.icon) {
+                    error(R.drawable.ic_logo)
+                    crossfade(true)
+                    placeholder(R.drawable.ic_launcher_background)
+                },
                 contentDescription = null,
-                contentScale = ContentScale.FillBounds
+                contentScale = ContentScale.FillWidth
             )
             Row(modifier = Modifier.padding(top = 12.dp)) {
                 Column(modifier = Modifier.weight(1f)) {
@@ -147,7 +153,7 @@ private fun BenefitModel.promoName(context: Context): String =
 @Composable
 fun PreviewBenefitItemView() {
     BenefitItem(
-        isLoading = true,
+        isLoading = false,
         model = BenefitModel(
             "1",
             "name1",
