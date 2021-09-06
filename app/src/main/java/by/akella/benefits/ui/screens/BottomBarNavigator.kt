@@ -34,7 +34,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import by.akella.benefits.R
 import by.akella.benefits.ui.navigation.Screens
-import by.akella.benefits.ui.notNull
+import util.notNull
 
 
 enum class HomeScreen(

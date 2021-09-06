@@ -23,20 +23,30 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+            buildConfigField "String", "USERNAME", "\"maksim.astapenko@mbicycle.com\""
+            buildConfigField "String", "PASSWORD", "\"qwer1234\""
         }
     }
     compileOptions {
         sourceCompatibility '1.8'
         targetCompatibility '1.8'
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
         useIR = true
     }
+
     buildFeatures {
         compose true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
     }
@@ -70,6 +80,7 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
     implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 

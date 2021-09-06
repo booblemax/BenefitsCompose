@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Benefits</string>
 
+    <string name="login_hint_email">Почта</string>
+    <string name="login_hint_password">Пароль</string>
+    <string name="login_label_error">Неправильные почта и/или пароль</string>
+    <string name="login_button_sign_in">Войти</string>
+
     <string name="navigation_tab_list">Список</string>
     <string name="navigation_tab_map">Карта</string>
     <string name="navigation_tab_news">Новости</string>
