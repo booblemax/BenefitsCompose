@@ -36,7 +36,10 @@ fun NavGraph(
                 BenefitMap()
             }
             composable(Screens.HomeScreens.Card.screenName) {
-                Card()
+                Card { route -> navController.navigate(route) {
+                        popUpTo(route) { inclusive = true }
+                    }
+                }
             }
         }
         composable(

@@ -21,16 +21,19 @@ class AuthControllerImpl(
 
     override fun isSignedIn(): Boolean = auth.currentUser != null
 
-    override fun signInByEmailAndPassword(email: String, password: String): Flow<SignInState> = callbackFlow {
-        send(SignInState.LOADING)
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                this.launch {
-                    if (it.isSuccessful) {
-                        send(SignInState.SUCCESS)
-                    } else {
-                        Timber.e(it.exception)
-                        send(SignInState.FAILED)
+    override fun signInByEmailAndPassword(email: String, password: String): Flow<SignInState> =
+        callbackFlow {
+            send(SignInState.LOADING)
+
+            val task = auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
+                    this.launch {
+                        if (it.isSuccessful) {
+                            send(SignInState.SUCCESS)
+                        } else {
+                            Timber.e(it.exception)
+                            send(SignInState.FAILED)
+                        }
                     }
                 }
             }

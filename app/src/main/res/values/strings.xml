@@ -19,4 +19,6 @@
     
     <string name="clip_promo_description">Промокод</string>
     <string name="clip_promo_copied_successfully">Промокод скопирован</string>
+
+    <string name="card_log_out_content_description">Выйти из аккаунта</string>
 </resources>
