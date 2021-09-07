@@ -9,5 +9,5 @@ import org.koin.dsl.module
 val vmModule = module {
     viewModel { BenefitsViewModel(get()) }
     viewModel { DetailsViewModel(get()) }
-    viewModel { SplashViewModel() }
+    viewModel { SplashViewModel(get()) }
 }
