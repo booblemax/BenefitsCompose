@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import by.akella.benefits.domain.models.BenefitModel
 import by.akella.benefits.domain.PlaceType
 import by.akella.benefits.domain.PromoType
-import util.Resource
+import by.akella.benefits.util.Resource
 import by.akella.benefits.ui.navigation.Screens
 import by.akella.benefits.ui.viewmodels.BenefitsViewModel
 import by.akella.benefits.ui.views.BenefitItem

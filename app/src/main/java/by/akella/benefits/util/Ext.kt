@@ -1,4 +1,4 @@
-package util
+package by.akella.benefits.util
 
 fun Any?.notNull() = this != null
 

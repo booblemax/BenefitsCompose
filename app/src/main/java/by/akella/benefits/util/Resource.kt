@@ -1,4 +1,4 @@
-package util
+package by.akella.benefits.util
 
 sealed class Resource<out T> {
     object None : Resource<Nothing>()

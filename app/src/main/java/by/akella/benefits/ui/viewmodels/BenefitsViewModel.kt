@@ -3,13 +3,12 @@ package by.akella.benefits.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import by.akella.benefits.domain.repos.BenefitsRepository
 import by.akella.benefits.domain.models.BenefitModel
-import util.CommonError
-import util.Resource
+import by.akella.benefits.util.CommonError
+import by.akella.benefits.util.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class BenefitsViewModel(
     private val repo: BenefitsRepository

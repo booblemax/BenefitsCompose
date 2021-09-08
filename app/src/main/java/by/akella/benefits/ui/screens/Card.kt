@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.dp
 import by.akella.benefits.R
 import by.akella.benefits.domain.models.UserModel
-import util.CommonError
+import by.akella.benefits.util.CommonError
 import by.akella.benefits.ui.navigation.Screens
 import by.akella.benefits.ui.theme.Blue700
 import by.akella.benefits.ui.viewmodels.CardState

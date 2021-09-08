@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import by.akella.benefits.R
 import by.akella.benefits.domain.models.BenefitModel
-import util.Resource
+import by.akella.benefits.util.Resource
 import by.akella.benefits.ui.navigation.Screens
 import by.akella.benefits.ui.viewmodels.DetailsViewModel
 import by.akella.benefits.ui.views.DiscountView

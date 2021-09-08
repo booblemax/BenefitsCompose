@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -27,11 +26,10 @@ import by.akella.benefits.ui.theme.BenefitsTheme
 import by.akella.benefits.ui.theme.Blue700
 import by.akella.benefits.ui.viewmodels.AuthState
 import by.akella.benefits.ui.viewmodels.SplashViewModel
-import by.akella.benefits.ui.views.Loading
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.getViewModel
-import util.MAX_EMAIL_LENGTH
-import util.MAX_PASSWORD_LENGTH
+import by.akella.benefits.util.MAX_EMAIL_LENGTH
+import by.akella.benefits.util.MAX_PASSWORD_LENGTH
 
 @Composable
 fun Splash(navigateTo: (String) -> Unit) {

@@ -1,4 +1,4 @@
-package util
+package by.akella.benefits.util
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData

@@ -4,14 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.akella.benefits.domain.auth.AuthController
 import by.akella.benefits.domain.auth.SignInState
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import timber.log.Timber
-import util.isValidEmail
+import by.akella.benefits.util.isValidEmail
 
 class SplashViewModel(
     private val auth: AuthController
