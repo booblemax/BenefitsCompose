@@ -1,15 +1,15 @@
 package by.akella.benefits.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
-import by.akella.benefits.domain.BenefitsRepository
+import by.akella.benefits.domain.repos.BenefitsRepository
 import by.akella.benefits.domain.models.BenefitModel
-import by.akella.benefits.ui.CommonError
-import by.akella.benefits.ui.Resource
+import util.CommonError
+import util.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class BenefitsViewModel(
     private val repo: BenefitsRepository
@@ -19,7 +19,7 @@ class BenefitsViewModel(
 
     private val mBenefitsState: MutableStateFlow<Resource<List<BenefitModel>>> =
         MutableStateFlow(Resource.None)
-    val benefitsState: StateFlow<Resource<List<BenefitModel>>> get() = mBenefitsState
+    val benefitsState: StateFlow<Resource<List<BenefitModel>>> = mBenefitsState
 
     fun loadData() {
         scope.launch {

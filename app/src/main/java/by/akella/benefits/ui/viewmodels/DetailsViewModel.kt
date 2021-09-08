@@ -1,11 +1,11 @@
 package by.akella.benefits.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
-import by.akella.benefits.domain.BenefitsRepository
+import by.akella.benefits.domain.repos.BenefitsRepository
 import by.akella.benefits.domain.models.BenefitModel
-import by.akella.benefits.ui.CommonError
-import by.akella.benefits.ui.Resource
-import by.akella.benefits.ui.Resource.None
+import util.CommonError
+import util.Resource
+import util.Resource.None
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

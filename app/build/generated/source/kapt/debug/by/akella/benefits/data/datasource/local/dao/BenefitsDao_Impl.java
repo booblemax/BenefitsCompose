@@ -32,6 +32,8 @@ public final class BenefitsDao_Impl implements BenefitsDao {
 
   private final EntityDeletionOrUpdateAdapter<BenefitEntity> __deletionAdapterOfBenefitEntity;
 
+  private final EntityDeletionOrUpdateAdapter<BenefitEntity> __updateAdapterOfBenefitEntity;
+
   public BenefitsDao_Impl(RoomDatabase __db) {
     this.__db = __db;
     this.__insertionAdapterOfBenefitEntity = new EntityInsertionAdapter<BenefitEntity>(__db) {
@@ -104,6 +106,66 @@ public final class BenefitsDao_Impl implements BenefitsDao {
         }
       }
     };
+    this.__updateAdapterOfBenefitEntity = new EntityDeletionOrUpdateAdapter<BenefitEntity>(__db) {
+      @Override
+      public String createQuery() {
+        return "UPDATE OR ABORT `benefits` SET `id` = ?,`name` = ?,`type` = ?,`discount` = ?,`discountType` = ?,`promo` = ?,`site` = ?,`description` = ?,`icon` = ? WHERE `id` = ?";
+      }
+
+      @Override
+      public void bind(SupportSQLiteStatement stmt, BenefitEntity value) {
+        if (value.getId() == null) {
+          stmt.bindNull(1);
+        } else {
+          stmt.bindString(1, value.getId());
+        }
+        if (value.getName() == null) {
+          stmt.bindNull(2);
+        } else {
+          stmt.bindString(2, value.getName());
+        }
+        if (value.getType() == null) {
+          stmt.bindNull(3);
+        } else {
+          stmt.bindString(3, value.getType());
+        }
+        if (value.getDiscount() == null) {
+          stmt.bindNull(4);
+        } else {
+          stmt.bindString(4, value.getDiscount());
+        }
+        if (value.getDiscountType() == null) {
+          stmt.bindNull(5);
+        } else {
+          stmt.bindString(5, value.getDiscountType());
+        }
+        if (value.getPromo() == null) {
+          stmt.bindNull(6);
+        } else {
+          stmt.bindString(6, value.getPromo());
+        }
+        if (value.getSite() == null) {
+          stmt.bindNull(7);
+        } else {
+          stmt.bindString(7, value.getSite());
+        }
+        if (value.getDescription() == null) {
+          stmt.bindNull(8);
+        } else {
+          stmt.bindString(8, value.getDescription());
+        }
+        if (value.getIcon() == null) {
+          stmt.bindNull(9);
+        } else {
+          stmt.bindString(9, value.getIcon());
+        }
+        if (value.getId() == null) {
+          stmt.bindNull(10);
+        } else {
+          stmt.bindString(10, value.getId());
+        }
+      }
+    };
   }
 
   @Override
@@ -133,6 +195,24 @@ public final class BenefitsDao_Impl implements BenefitsDao {
         __db.beginTransaction();
         try {
           __deletionAdapterOfBenefitEntity.handleMultiple(models);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, continuation);
+  }
+
+  @Override
+  public Object update(final BenefitEntity[] models,
+      final Continuation<? super Unit> continuation) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __updateAdapterOfBenefitEntity.handleMultiple(models);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {

@@ -38,7 +38,7 @@ fun Splash(navigateTo: (String) -> Unit) {
     val viewModel = getViewModel<SplashViewModel>()
     val authState = viewModel.authState.collectAsState(initial = AuthState.Loading)
 
-    if (authState.value is AuthState.SignedIn) navigateTo(Screens.HomeScreens.List.screenName)
+    if (authState.value is AuthState.SignedIn) navigateTo(Screens.Home.screenName)
     LoginForm(authState.value) { email, pass -> viewModel.signIn(email, pass) }
 
     LaunchedEffect(Screens.Splash) {

@@ -11,5 +11,5 @@ val vmModule = module {
     viewModel { BenefitsViewModel(get()) }
     viewModel { DetailsViewModel(get()) }
     viewModel { SplashViewModel(get()) }
-    viewModel { CardViewModel(get()) }
+    viewModel { CardViewModel(get(), get()) }
 }

@@ -1,4 +1,4 @@
-package by.akella.benefits.ui
+package util
 
 sealed class Resource<out T> {
     object None : Resource<Nothing>()
@@ -7,4 +7,4 @@ sealed class Resource<out T> {
     class Error(val error: CommonError) : Resource<Nothing>()
 }
 
-open class CommonError(val message: String, val e: Throwable)
+open class CommonError(val message: String, val e: Throwable = Exception())

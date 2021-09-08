@@ -1,4 +1,4 @@
-package by.akella.benefits.data.datasource.remote
+package by.akella.benefits.data.datasource.remote.benefits
 
 import by.akella.benefits.domain.PromoType
 import by.akella.benefits.domain.models.BenefitModel

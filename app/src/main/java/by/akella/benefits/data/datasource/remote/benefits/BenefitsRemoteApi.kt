@@ -1,23 +1,23 @@
-package by.akella.benefits.data.datasource.remote
+package by.akella.benefits.data.datasource.remote.benefits
 
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.suspendCancellableCoroutine
+import timber.log.Timber
 import kotlin.coroutines.resumeWithException
 
-interface RemoteDataApi {
+interface BenefitsRemoteApi {
 
     suspend fun getBenefits(): List<BenefitsResponse>
 }
 
-class RemoteDataApiImpl(
+class BenefitsRemoteApiImpl(
     private val db: FirebaseDatabase
-) : RemoteDataApi {
+) : BenefitsRemoteApi {
 
     override suspend fun getBenefits(): List<BenefitsResponse> =
         suspendCancellableCoroutine { continuation ->
-            db.reference.child("benefits").get()
+            db.reference.child("benefits")
+                .get()
                 .addOnSuccessListener { result ->
                     if (result.exists()) {
                         val benefits =

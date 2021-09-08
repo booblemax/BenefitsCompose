@@ -20,6 +20,15 @@ data class BenefitModel(
     val icon: String = ""
 ) : Parcelable
 
+@Parcelize
+data class UserModel(
+    val uid: String = UUID.randomUUID().toString(),
+    val fio: String = "",
+    val city: String = "",
+    val image: String = "",
+    val position: String = ""
+) : Parcelable
+
 internal fun String.map() =
     when (this) {
         "cafe" -> PlaceType.CAFE

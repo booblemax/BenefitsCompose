@@ -19,8 +19,6 @@ object EnumMapper {
     }
 }
 
-const val EMPTY: String = ""
-
 fun Modifier.loadingShimmer(isLoading: Boolean) =
     this.placeholder(
         isLoading,

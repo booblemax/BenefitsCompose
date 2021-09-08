@@ -13,12 +13,13 @@ import androidx.compose.ui.unit.dp
 import by.akella.benefits.domain.models.BenefitModel
 import by.akella.benefits.domain.PlaceType
 import by.akella.benefits.domain.PromoType
-import by.akella.benefits.ui.Resource
+import util.Resource
 import by.akella.benefits.ui.navigation.Screens
 import by.akella.benefits.ui.viewmodels.BenefitsViewModel
 import by.akella.benefits.ui.views.BenefitItem
 import by.akella.benefits.ui.views.ErrorView
 import org.koin.androidx.compose.getViewModel
+import timber.log.Timber
 
 @Composable
 fun Benefits(navigateTo: (String) -> Unit) {
@@ -33,6 +34,7 @@ fun Benefits(navigateTo: (String) -> Unit) {
             is Resource.Success<List<BenefitModel>> ->
                 BenefitsList(false, value.data) { navigateTo(Screens.Details.createRoute(it.id)) }
             is Resource.Error -> ErrorView(error = value.error) {
+                Timber.e("Error")
                 viewModel.loadData()
             }
         }

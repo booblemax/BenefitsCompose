@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import by.akella.benefits.domain.PromoType
 import by.akella.benefits.domain.models.BenefitModel
+import by.akella.benefits.domain.models.UserModel
 import by.akella.benefits.domain.models.map
 
 @Entity(tableName = "benefits")
@@ -18,6 +19,16 @@ data class BenefitEntity(
     val site: String,
     val description: String,
     val icon: String
+)
+
+@Entity(tableName = "users")
+data class UserEntity(
+    @PrimaryKey
+    val uid: String,
+    val fio: String,
+    val city: String,
+    val image: String,
+    val position: String
 )
 
 fun BenefitEntity.toModel() =
@@ -46,3 +57,9 @@ fun BenefitModel.toEntity() =
         description,
         icon
     )
+
+fun UserEntity.toModel() =
+    UserModel(uid, fio, city, image, position)
+
+fun UserModel.toEntity() =
+    UserEntity(uid, fio, city, image, position)

@@ -2,12 +2,14 @@ package by.akella.benefits.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import by.akella.benefits.ui.screens.*
 
+@OptIn(ExperimentalUnitApi::class)
 @Composable
 fun NavGraph(
     navController: NavHostController,
@@ -19,10 +21,8 @@ fun NavGraph(
         startDestination = Screens.Splash.screenName,
     ) {
         composable(Screens.Splash.screenName) {
-            Splash {
-                navController.navigate(Screens.Home.screenName) {
-                    popUpTo(Screens.Splash.screenName) { inclusive = true }
-                }
+            Splash { route ->
+                navController.navigate(route) { popUpTo(route) { inclusive = true } }
             }
         }
         navigation(
@@ -36,7 +36,8 @@ fun NavGraph(
                 BenefitMap()
             }
             composable(Screens.HomeScreens.Card.screenName) {
-                Card { route -> navController.navigate(route) {
+                Card { route ->
+                    navController.navigate(route) {
                         popUpTo(route) { inclusive = true }
                     }
                 }

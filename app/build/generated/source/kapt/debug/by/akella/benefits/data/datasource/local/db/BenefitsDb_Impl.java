@@ -16,6 +16,8 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper.Callback;
 import androidx.sqlite.db.SupportSQLiteOpenHelper.Configuration;
 import by.akella.benefits.data.datasource.local.dao.BenefitsDao;
 import by.akella.benefits.data.datasource.local.dao.BenefitsDao_Impl;
+import by.akella.benefits.data.datasource.local.dao.UsersDao;
+import by.akella.benefits.data.datasource.local.dao.UsersDao_Impl;
 import java.lang.Class;
 import java.lang.Override;
 import java.lang.String;
@@ -30,19 +32,23 @@ import java.util.Set;
 public final class BenefitsDb_Impl extends BenefitsDb {
   private volatile BenefitsDao _benefitsDao;
 
+  private volatile UsersDao _usersDao;
+
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
     final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("CREATE TABLE IF NOT EXISTS `benefits` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `type` TEXT NOT NULL, `discount` TEXT NOT NULL, `discountType` TEXT NOT NULL, `promo` TEXT NOT NULL, `site` TEXT NOT NULL, `description` TEXT NOT NULL, `icon` TEXT NOT NULL, PRIMARY KEY(`id`))");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `users` (`uid` TEXT NOT NULL, `fio` TEXT NOT NULL, `city` TEXT NOT NULL, `image` TEXT NOT NULL, `position` TEXT NOT NULL, PRIMARY KEY(`uid`))");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3acd07e4847a375d7da007b6e5f78fb0')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f178e1730e48e9241c195186ee819845')");
       }
 
       @Override
       public void dropAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("DROP TABLE IF EXISTS `benefits`");
+        _db.execSQL("DROP TABLE IF EXISTS `users`");
         if (mCallbacks != null) {
           for (int _i = 0, _size = mCallbacks.size(); _i < _size; _i++) {
             mCallbacks.get(_i).onDestructiveMigration(_db);
@@ -100,9 +106,24 @@ public final class BenefitsDb_Impl extends BenefitsDb {
                   + " Expected:\n" + _infoBenefits + "\n"
                   + " Found:\n" + _existingBenefits);
         }
+        final HashMap<String, TableInfo.Column> _columnsUsers = new HashMap<String, TableInfo.Column>(5);
+        _columnsUsers.put("uid", new TableInfo.Column("uid", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("fio", new TableInfo.Column("fio", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("city", new TableInfo.Column("city", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("image", new TableInfo.Column("image", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("position", new TableInfo.Column("position", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysUsers = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesUsers = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoUsers = new TableInfo("users", _columnsUsers, _foreignKeysUsers, _indicesUsers);
+        final TableInfo _existingUsers = TableInfo.read(_db, "users");
+        if (! _infoUsers.equals(_existingUsers)) {
+          return new RoomOpenHelper.ValidationResult(false, "users(by.akella.benefits.data.datasource.local.UserEntity).\n"
+                  + " Expected:\n" + _infoUsers + "\n"
+                  + " Found:\n" + _existingUsers);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "3acd07e4847a375d7da007b6e5f78fb0", "b1e0ea602d7debcbc631f9f168b4066e");
+    }, "f178e1730e48e9241c195186ee819845", "b780bd6573a92423ee33a030057c0f3f");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
@@ -115,7 +136,7 @@ public final class BenefitsDb_Impl extends BenefitsDb {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "benefits");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "benefits","users");
   }
 
   @Override
@@ -125,6 +146,7 @@ public final class BenefitsDb_Impl extends BenefitsDb {
     try {
       super.beginTransaction();
       _db.execSQL("DELETE FROM `benefits`");
+      _db.execSQL("DELETE FROM `users`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -139,6 +161,7 @@ public final class BenefitsDb_Impl extends BenefitsDb {
   protected Map<Class<?>, List<Class<?>>> getRequiredTypeConverters() {
     final HashMap<Class<?>, List<Class<?>>> _typeConvertersMap = new HashMap<Class<?>, List<Class<?>>>();
     _typeConvertersMap.put(BenefitsDao.class, BenefitsDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(UsersDao.class, UsersDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -152,6 +175,20 @@ public final class BenefitsDb_Impl extends BenefitsDb {
           _benefitsDao = new BenefitsDao_Impl(this);
         }
         return _benefitsDao;
+      }
+    }
+  }
+
+  @Override
+  public UsersDao getUsersDao() {
+    if (_usersDao != null) {
+      return _usersDao;
+    } else {
+      synchronized(this) {
+        if(_usersDao == null) {
+          _usersDao = new UsersDao_Impl(this);
+        }
+        return _usersDao;
       }
     }
   }

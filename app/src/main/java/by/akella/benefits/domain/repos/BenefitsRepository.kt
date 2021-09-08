@@ -1,4 +1,4 @@
-package by.akella.benefits.domain
+package by.akella.benefits.domain.repos
 
 import by.akella.benefits.domain.models.BenefitModel
 import kotlinx.coroutines.flow.Flow

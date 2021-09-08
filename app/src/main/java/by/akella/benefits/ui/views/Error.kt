@@ -11,7 +11,8 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import by.akella.benefits.ui.CommonError
+import androidx.compose.ui.unit.sp
+import util.CommonError
 import timber.log.Timber
 
 @Composable
@@ -26,7 +27,9 @@ fun ErrorView(error: CommonError, retry: () -> Unit) {
             modifier = Modifier
                 .padding(16.dp)
                 .align(CenterHorizontally),
-            text = error.message)
+            text = error.message,
+            fontSize = 20.sp
+        )
         Button(
             onClick = { retry() },
             modifier = Modifier.align(CenterHorizontally)
