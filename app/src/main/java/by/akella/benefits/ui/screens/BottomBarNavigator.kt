@@ -43,7 +43,7 @@ enum class HomeScreen(
     val route: String
 ) {
     LIST(R.drawable.ic_list, R.string.navigation_tab_list, Screens.HomeScreens.List.screenName),
-    MAP(R.drawable.ic_map, R.string.navigation_tab_map, Screens.HomeScreens.Map.screenName),
+//    MAP(R.drawable.ic_map, R.string.navigation_tab_map, Screens.HomeScreens.Map.screenName),
     CARD(R.drawable.ic_card, R.string.navigation_tab_card, Screens.HomeScreens.Card.screenName)
 }
 
