@@ -2,6 +2,7 @@ package by.akella.benefits.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
@@ -27,7 +28,10 @@ fun Benefits(navigateTo: (String) -> Unit) {
     val benefitsState = viewModel.benefitsState.collectAsState()
 
     Column {
-        TopAppBar(title = { Text(text = "Benefits") })
+        TopAppBar(
+            title = { Text(text = "Benefits") },
+            backgroundColor = MaterialTheme.colors.primaryVariant
+        )
         when (val value = benefitsState.value) {
             is Resource.Loading ->
                 BenefitsList(true, listOf(BenefitModel(), BenefitModel(), BenefitModel(), BenefitModel(), BenefitModel())) { navigateTo(Screens.Details.createRoute(it.id)) }

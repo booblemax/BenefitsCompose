@@ -82,6 +82,7 @@ private fun BenefitsBottomNavBar(
                 text = {
                     Text(
                         text = stringResource(screen.titleId).uppercase(),
+                        color = Color.White,
                         fontWeight = FontWeight.Bold
                     )
                 },
@@ -156,7 +157,7 @@ private fun SelecteableBottomNavItem(
 ) {
     Surface(
         modifier = Modifier.padding(PaddingValue),
-        color = MaterialTheme.colors.primary,
+        color = MaterialTheme.colors.primarySurface,
         shape = RoundedCornerShape(50),
         border = BorderStroke(BorderWidth, Color.White.copy(alpha = progressAnimationValue))
     ) {

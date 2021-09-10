@@ -2,6 +2,7 @@ package by.akella.benefits.ui.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -62,14 +63,13 @@ fun NavGraph(
             }
         }
     }
-
 }
 
 @Composable
 fun ApplyDefaultSystemBarsColors() {
     val systemUiController = rememberSystemUiController()
     val color = MaterialTheme.colors.primaryVariant
-    val color1 = MaterialTheme.colors.primary
+    val color1 = MaterialTheme.colors.primarySurface
     LaunchedEffect(key1 = "systemBars") {
         systemUiController.setStatusBarColor(color)
         systemUiController.setNavigationBarColor(color1)
