@@ -1,6 +1,9 @@
 package by.akella.benefits.ui.screens
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -27,25 +30,39 @@ import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.dp
 import by.akella.benefits.R
 import by.akella.benefits.domain.models.UserModel
-import by.akella.benefits.util.CommonError
 import by.akella.benefits.ui.navigation.Screens
 import by.akella.benefits.ui.theme.Blue700
 import by.akella.benefits.ui.viewmodels.CardState
 import by.akella.benefits.ui.viewmodels.CardViewModel
 import by.akella.benefits.ui.views.ErrorView
 import by.akella.benefits.ui.views.Loading
+import by.akella.benefits.util.CommonError
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import org.koin.androidx.compose.getViewModel
 
 @ExperimentalCoilApi
 @ExperimentalUnitApi
 @Composable
 fun Card(navigateTo: (String) -> Unit) {
+    val systemUiController = rememberSystemUiController()
+    val color = MaterialTheme.colors.surface
+
     val viewModel = getViewModel<CardViewModel>()
     val cardState = viewModel.cardState.collectAsState()
 
-    when (val state = cardState.value) {
+    CardStateScreen(state = cardState.value, viewModel = viewModel, navigateTo = navigateTo)
+
+    LaunchedEffect(key1 = Screens.HomeScreens.Card.screenName) {
+        systemUiController.setStatusBarColor(color)
+        viewModel.loadUserData()
+    }
+}
+
+@Composable
+fun CardStateScreen(state: CardState, viewModel: CardViewModel, navigateTo: (String) -> Unit) {
+    when (state) {
         CardState.Loading -> Loading()
         is CardState.LoggedOut -> navigateTo(Screens.Splash.screenName)
         is CardState.Success -> UserCard(state.model, viewModel::logOut)
@@ -57,10 +74,6 @@ fun Card(navigateTo: (String) -> Unit) {
             UserCard(state.model, viewModel::logOut)
             Snackbar { Text(text = "Не получилось выйти из аккаунта :(") }
         }
-    }
-
-    LaunchedEffect(key1 = Screens.HomeScreens.Card.screenName) {
-        viewModel.loadUserData()
     }
 }
 
@@ -144,7 +157,7 @@ fun Avatar(url: String?) {
     }
     Image(
         modifier = Modifier
-            .padding(top = 48.dp, start = 64.dp, end = 64.dp)
+            .padding(top = 48.dp)
             .size(200.dp)
             .clip(CircleShape)
             .border(

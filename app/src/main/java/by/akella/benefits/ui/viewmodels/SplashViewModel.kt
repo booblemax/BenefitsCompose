@@ -4,12 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.akella.benefits.domain.auth.AuthController
 import by.akella.benefits.domain.auth.SignInState
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import by.akella.benefits.util.isValidEmail
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 
 class SplashViewModel(
     private val auth: AuthController
@@ -25,19 +23,22 @@ class SplashViewModel(
     }
 
     fun signIn(email: String, pass: String) {
-        viewModelScope.launch { if (!email.isValidEmail()) mAuthState.emit(AuthState.Signing.Input.Error) }
+        viewModelScope.launch {
+            if (!email.isValidEmail()) {
+                mAuthState.emit(AuthState.Signing.Input.Error)
+            } else {
+                auth.signInByEmailAndPassword(email, pass)
+                    .collect {
+                        val state = when (it) {
+                            SignInState.LOADING -> AuthState.Signing.Loading
+                            SignInState.SUCCESS -> AuthState.SignedIn
+                            SignInState.FAILED -> AuthState.Signing.Input.Error
+                        }
 
-        auth.signInByEmailAndPassword(email, pass)
-            .onEach {
-                val state = when (it) {
-                    SignInState.LOADING -> AuthState.Signing.Loading
-                    SignInState.SUCCESS -> AuthState.SignedIn
-                    SignInState.FAILED -> AuthState.Signing.Input.Error
-                }
-
-                mAuthState.emit(state)
+                        mAuthState.emit(state)
+                    }
             }
-            .launchIn(viewModelScope)
+        }
     }
 }
 

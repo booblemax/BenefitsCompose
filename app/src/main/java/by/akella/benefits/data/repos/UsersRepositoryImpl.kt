@@ -17,11 +17,17 @@ class UsersRepositoryImpl(
 
     override fun getUserData(uid: String): Flow<UserModel> = flow {
         try {
-            val remoteResult = remote.getUserData(uid).toModel()
-            emit(remoteResult)
-            local.insert(remoteResult.toEntity())
+            local.getUserData(uid)?.let { userEntity ->
+                val userLocalModel = userEntity.toModel()
+                emit(userLocalModel)
+                val userRemoteModel = remote.getUserData(uid).toModel()
+                if (userLocalModel != userRemoteModel) {
+                    emit(userRemoteModel)
+                    local.insert(userRemoteModel.toEntity())
+                }
+            }
         } catch (e: Exception) {
-            emit(local.getUserData(uid).toModel())
+            local.getUserData(uid)?.let { emit(it.toModel()) }
         }
     }
 }
