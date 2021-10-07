@@ -1,0 +1,17 @@
+CREATE TABLE benefits (
+    id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    type TEXT NOT NULL,
+    discount TEXT NOT NULL,
+    discountType TEXT NOT NULL,
+    promo TEXT NOT NULL,
+    site TEXT NOT NULL,
+    description TEXT NOT NULL,
+    icon TEXT NOT NULL
+);
+
+insert:
+INSERT INTO benefits VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+getAll:
+SELECT * FROM benefits;

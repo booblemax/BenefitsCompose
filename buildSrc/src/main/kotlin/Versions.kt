@@ -15,12 +15,14 @@ object Classpath {
     const val googleServices = "com.google.gms:google-services:${Versions.googleServices}"
     const val ktlinGradlePlugin = "org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktlintGradlePlugin}"
     const val testInstrumentalRunner = "androidx.test.runner.AndroidJUnitRunner"
+    const val sqldelight = "com.squareup.sqldelight:gradle-plugin:${Versions.sqldelight}"
 }
 
 object Versions {
     const val ktLint = "6.1.0"
     const val ktlintGradlePlugin = "9.2.1"
     const val detekt = "1.10.0"
+    const val sqldelight = "1.5.1"
 
     const val googleServices = "4.3.10"
     const val gradle = "7.0.1"

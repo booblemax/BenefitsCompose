@@ -1,0 +1,13 @@
+CREATE TABLE users (
+    uid TEXT NOT NULL PRIMARY KEY,
+    fio TEXT NOT NULL,
+    city TEXT NOT NULL,
+    image TEXT NOT NULL,
+    position TEXT NOT NULL
+);
+
+insert:
+INSERT INTO users VALUES (?, ?, ?, ?, ?);
+
+getUserData:
+SELECT * FROM users WHERE uid == ?;
