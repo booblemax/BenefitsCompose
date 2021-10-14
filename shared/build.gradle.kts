@@ -40,19 +40,20 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-stdlib")
-                implementation("com.squareup.sqldelight:runtime:${Versions.sqldelight}")
+                implementation(Libs.kotlin_stdlib)
+                implementation(Libs.SQLDelight.runtime)
+                implementation(Libs.coroutines)
             }
         }
 
         val androidMain by getting {
             dependencies {
-                implementation("com.squareup.sqldelight:android-driver:${Versions.sqldelight}")
+                implementation(Libs.SQLDelight.android)
             }
         }
         val iosMain by getting {
             dependencies {
-                implementation("com.squareup.sqldelight:native-driver:${Versions.sqldelight}")
+                implementation(Libs.SQLDelight.ios)
             }
         }
     }

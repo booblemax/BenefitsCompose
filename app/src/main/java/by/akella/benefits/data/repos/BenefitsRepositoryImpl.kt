@@ -7,8 +7,8 @@ import by.akella.benefits.data.datasource.remote.benefits.BenefitsRemoteApi
 import by.akella.benefits.data.datasource.remote.benefits.toModel
 import by.akella.benefits.domain.models.BenefitModel
 import by.akella.benefits.domain.repos.BenefitsRepository
+
 import kotlinx.coroutines.flow.*
-import timber.log.Timber
 
 class BenefitsRepositoryImpl(
     private val benefitsRemoteApi: BenefitsRemoteApi,

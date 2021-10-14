@@ -59,7 +59,6 @@ android {
 }
 
 dependencies {
-
     implementation(Libs.kotlin)
     implementation(Libs.coreKtx)
     implementation(Libs.appcompat)
@@ -85,9 +84,10 @@ dependencies {
     implementation(Libs.Room.ktx)
     kapt(Libs.Room.compiler)
 
-//    implementation(Libs.Firebase.bom)
     implementation(Libs.Firebase.databaseKtx)
     implementation(Libs.Firebase.authKtx)
     implementation(Libs.Firebase.storageKtx)
     implementation(Libs.Firebase.uiStorage)
+
+    implementation(project(mapOf("path" to ":shared")))
 }

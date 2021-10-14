@@ -5,13 +5,21 @@ CREATE TABLE benefits (
     discount TEXT NOT NULL,
     discountType TEXT NOT NULL,
     promo TEXT NOT NULL,
+    promoType TEXT NOT NULL,
     site TEXT NOT NULL,
     description TEXT NOT NULL,
     icon TEXT NOT NULL
 );
 
 insert:
-INSERT INTO benefits VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO benefits
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 getAll:
-SELECT * FROM benefits;
+SELECT *
+FROM benefits;
+
+getById:
+SELECT *
+FROM benefits
+WHERE benefits.id == ?;

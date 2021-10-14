@@ -51,6 +51,7 @@ object Versions {
 }
 
 object Libs {
+    const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib"
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
@@ -86,10 +87,15 @@ object Libs {
     }
 
     object Firebase {
-        const val bom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
         const val databaseKtx = "com.google.firebase:firebase-database-ktx:${Versions.firebaseDatabase}"
         const val authKtx = "com.google.firebase:firebase-auth-ktx:${Versions.firebaseAuth}"
         const val storageKtx = "com.google.firebase:firebase-storage-ktx:${Versions.firebaseStorage}"
         const val uiStorage = "com.firebaseui:firebase-ui-storage:${Versions.firebaseUi}"
+    }
+
+    object SQLDelight {
+        const val runtime = "com.squareup.sqldelight:runtime:${Versions.sqldelight}"
+        const val android = "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"
+        const val ios = "com.squareup.sqldelight:native-driver:${Versions.sqldelight}"
     }
 }

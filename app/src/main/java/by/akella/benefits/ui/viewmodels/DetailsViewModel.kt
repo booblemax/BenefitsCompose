@@ -1,8 +1,8 @@
 package by.akella.benefits.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
-import by.akella.benefits.domain.repos.BenefitsRepository
 import by.akella.benefits.domain.models.BenefitModel
+import by.akella.benefits.domain.repos.BenefitsRepository
 import by.akella.benefits.util.CommonError
 import by.akella.benefits.util.Resource
 import by.akella.benefits.util.Resource.None
