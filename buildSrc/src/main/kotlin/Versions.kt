@@ -25,7 +25,7 @@ object Versions {
     const val sqldelight = "1.5.1"
 
     const val googleServices = "4.3.10"
-    const val gradle = "7.0.1"
+    const val gradle = "7.0.3"
     const val kotlin = "1.5.30"
     const val appcompat = "1.3.1"
     const val ktx = "1.6.0"
@@ -47,7 +47,8 @@ object Versions {
     const val gson = "2.8.7"
     const val conscrypt = "2.4.0"
     const val threetenabp = "1.2.3"
-    const val coroutines = "1.3.6"
+    const val coroutines = "1.5.2"
+    const val coroutinesNative = "1.5.2-native-mt"
 }
 
 object Libs {
@@ -55,6 +56,7 @@ object Libs {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    const val coroutinesCoreNative = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesNative}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.ktx}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val lifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleKtx}"

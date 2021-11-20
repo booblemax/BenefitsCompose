@@ -21,7 +21,7 @@ kotlin {
 
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
         System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-//        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
         else -> ::iosX64
     }
 
@@ -42,7 +42,7 @@ kotlin {
             dependencies {
                 implementation(Libs.kotlin_stdlib)
                 implementation(Libs.SQLDelight.runtime)
-                implementation(Libs.coroutines)
+                implementation(Libs.coroutinesCoreNative)
             }
         }
 
