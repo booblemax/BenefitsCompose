@@ -42,7 +42,7 @@ kotlin {
             dependencies {
                 implementation(Libs.kotlin_stdlib)
                 implementation(Libs.SQLDelight.runtime)
-                implementation(Libs.coroutines)
+                implementation(Libs.coroutinesCoreNative)
             }
         }
 
