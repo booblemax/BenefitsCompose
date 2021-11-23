@@ -43,6 +43,7 @@ kotlin {
                 implementation(Libs.kotlin_stdlib)
                 implementation(Libs.SQLDelight.runtime)
                 implementation(Libs.coroutinesCoreNative)
+                implementation(Libs.di)
             }
         }
 
