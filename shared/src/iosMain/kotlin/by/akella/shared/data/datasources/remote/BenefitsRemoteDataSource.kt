@@ -1,13 +1,10 @@
-package by.akella.shared.data.datasources.local
+package by.akella.shared.data.datasources.remote
 
 import by.akella.shared.data.datasources.BenefitsDataSource
 import by.akella.shared.domain.models.BenefitModel
-import by.akella.sqldelight.benefits.Benefits
 import kotlinx.coroutines.flow.Flow
 
-class BenefitsLocalDataSource(
-    private val benefits: Benefits
-) : BenefitsDataSource {
+actual class BenefitsRemoteDataSource : BenefitsDataSource {
 
     override suspend fun saveBenefits(benefits: List<BenefitModel>) {
         TODO("Not yet implemented")
