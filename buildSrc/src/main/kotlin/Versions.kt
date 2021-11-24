@@ -48,7 +48,6 @@ object Versions {
     const val threetenabp = "1.2.3"
     const val coroutines = "1.5.2"
     const val coroutinesNative = "1.5.2-native-mt"
-    const val di = "1.0.4.5"
 }
 
 object Libs {
@@ -63,7 +62,6 @@ object Libs {
     const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
-    const val di = "io.github.anioutkazharkova:di-multiplatform-lib:${Versions.di}"
 
     object Compose {
         const val ui = "androidx.compose.ui:ui:${Versions.compose}"
