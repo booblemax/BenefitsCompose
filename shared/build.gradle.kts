@@ -43,6 +43,9 @@ kotlin {
                 implementation(Libs.kotlin_stdlib)
                 implementation(Libs.SQLDelight.runtime)
                 implementation(Libs.coroutinesCoreNative)
+                implementation(Libs.Firebase.Multiplatform.storage)
+                implementation(Libs.Firebase.Multiplatform.auth)
+                implementation(Libs.Firebase.Multiplatform.database)
             }
         }
 

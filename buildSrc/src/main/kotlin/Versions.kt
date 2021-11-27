@@ -41,6 +41,7 @@ object Versions {
     const val firebaseStorage = "20.0.0"
     const val firebaseAuth = "21.0.1"
     const val firebaseUi = "7.2.0"
+    const val firebase = "1.4.3"
     const val timber = "4.7.1"
     const val room = "2.3.0"
     const val gson = "2.8.7"
@@ -92,6 +93,12 @@ object Libs {
         const val authKtx = "com.google.firebase:firebase-auth-ktx:${Versions.firebaseAuth}"
         const val storageKtx = "com.google.firebase:firebase-storage-ktx:${Versions.firebaseStorage}"
         const val uiStorage = "com.firebaseui:firebase-ui-storage:${Versions.firebaseUi}"
+
+        object Multiplatform {
+            const val database = "dev.gitlive:firebase-database:${Versions.firebase}"
+            const val auth = "dev.gitlive:firebase-auth:${Versions.firebase}"
+            const val storage = "dev.gitlive:firebase-storage:${Versions.firebase}"
+        }
     }
 
     object SQLDelight {
