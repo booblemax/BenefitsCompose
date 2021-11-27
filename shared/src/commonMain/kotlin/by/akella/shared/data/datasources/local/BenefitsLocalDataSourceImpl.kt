@@ -1,18 +1,34 @@
 package by.akella.shared.data.datasources.local
 
 import by.akella.shared.data.datasources.BenefitsLocalDataSource
-import by.akella.shared.data.datasources.BenefitsRemoteDataSource
-import by.akella.shared.domain.models.BenefitModel
-import by.akella.shared.domain.models.PlaceType
-import by.akella.shared.domain.models.PromoType
+import by.akella.shared.domain.models.*
+import by.akella.shared.domain.models.toPlaceType
 import by.akella.sqldelight.benefits.Benefits
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class BenefitsLocalDataSourceImpl(
     private val benefits: Benefits
 ) : BenefitsLocalDataSource {
 
-    override suspend fun saveBenefits(items: List<BenefitModel>) {
+    private val benefitMapper =
+        { id: String, name: String, type: String, discount: String, discountType: String,
+          promo: String, promoType: String, site: String, description: String, icon: String ->
+            BenefitModel(
+                id,
+                name,
+                type.toPlaceType(),
+                discount,
+                discountType,
+                promo,
+                promoType.toPromoType(),
+                site,
+                description,
+                icon
+            )
+        }
+
+    override fun saveBenefits(items: List<BenefitModel>): Flow<Any> = flow {
         benefits.benefitsQueries.transaction {
             items.forEach {
                 benefits.benefitsQueries.insert(
@@ -20,22 +36,15 @@ class BenefitsLocalDataSourceImpl(
                 )
             }
         }
+        emit(1)
     }
 
-    override suspend fun getBenefitList(): List<BenefitModel> {
-        return benefits.benefitsQueries.getAll { id, name, type, discount, discountType, promo, promoType, site, description, icon ->
-            BenefitModel(
-                id,
-                name,
-                PlaceType.values()[type.toInt()],
-                discount,
-                discountType,
-                promo,
-                PromoType.values()[promoType.toInt()],
-                site,
-                description,
-                icon
-            )
-        }.executeAsList()
+    override fun getBenefitList(): Flow<List<BenefitModel>> = flow {
+        val list = benefits.benefitsQueries.getAll(benefitMapper).executeAsList()
+        emit(list)
+    }
+
+    override fun getBenefitModel(uid: String): Flow<BenefitModel> = flow {
+        benefits.benefitsQueries.getById(uid, benefitMapper)
     }
 }

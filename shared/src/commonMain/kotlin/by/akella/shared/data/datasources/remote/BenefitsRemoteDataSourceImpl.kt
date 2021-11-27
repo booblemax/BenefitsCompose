@@ -2,10 +2,16 @@ package by.akella.shared.data.datasources.remote
 
 import by.akella.shared.data.datasources.BenefitsRemoteDataSource
 import by.akella.shared.domain.models.BenefitModel
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.FirebaseApp
+import dev.gitlive.firebase.database.database
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class BenefitsRemoteDataSourceImpl : BenefitsRemoteDataSource {
 
-    override suspend fun getBenefitList(force: Boolean): List<BenefitModel> {
-        TODO("Not yet implemented")
-    }
+    override fun getBenefitList(): Flow<List<BenefitModel>> =
+        Firebase.database.reference("benefits")
+            .valueEvents
+            .map { it.value() }
 }

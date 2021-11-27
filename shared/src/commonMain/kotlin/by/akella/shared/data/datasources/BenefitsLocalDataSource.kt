@@ -1,10 +1,13 @@
 package by.akella.shared.data.datasources
 
 import by.akella.shared.domain.models.BenefitModel
+import kotlinx.coroutines.flow.Flow
 
 interface BenefitsLocalDataSource {
 
-    suspend fun saveBenefits(items: List<BenefitModel>)
+    fun saveBenefits(items: List<BenefitModel>): Flow<Any>
 
-    suspend fun getBenefitList(): List<BenefitModel>
+    fun getBenefitList(): Flow<List<BenefitModel>>
+
+    fun getBenefitModel(uid: String): Flow<BenefitModel>
 }

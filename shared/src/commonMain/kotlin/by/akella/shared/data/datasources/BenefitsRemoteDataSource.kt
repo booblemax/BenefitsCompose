@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface BenefitsRemoteDataSource {
 
-    suspend fun getBenefitList(force: Boolean): List<BenefitModel>
+    fun getBenefitList(): Flow<List<BenefitModel>>
 }

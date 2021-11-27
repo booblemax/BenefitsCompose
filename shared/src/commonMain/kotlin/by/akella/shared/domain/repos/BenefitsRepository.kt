@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface BenefitsRepository {
 
-    suspend fun saveBenefits(benefits: List<BenefitModel>)
+    fun saveBenefits(benefits: List<BenefitModel>)
 
     fun getBenefitList(force: Boolean): Flow<List<BenefitModel>>
 
