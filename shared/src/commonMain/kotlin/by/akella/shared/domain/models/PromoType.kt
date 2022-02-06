@@ -1,5 +1,12 @@
 package by.akella.shared.domain.models
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class PromoType {
-    BADGE, WORD
+    @SerialName("badge")
+    BADGE,
+    @SerialName("word")
+    WORD
 }

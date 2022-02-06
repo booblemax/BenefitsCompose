@@ -13,6 +13,8 @@
 
     <string name="shop_name">Магазин</string>
     <string name="cafe_name">Кафе/Ресторан</string>
+    <string name="service_name">Услуги</string>
+    <string name="quest_name">Квест</string>
     <string name="undefined_name">Бездна</string>
 
     <string name="badge_name">бейдж</string>

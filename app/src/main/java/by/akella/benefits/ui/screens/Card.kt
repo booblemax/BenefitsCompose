@@ -29,7 +29,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.dp
 import by.akella.benefits.R
-import by.akella.benefits.domain.models.UserModel
 import by.akella.benefits.ui.navigation.Screens
 import by.akella.benefits.ui.theme.Blue700
 import by.akella.benefits.ui.viewmodels.CardState
@@ -37,6 +36,7 @@ import by.akella.benefits.ui.viewmodels.CardViewModel
 import by.akella.benefits.ui.views.ErrorView
 import by.akella.benefits.ui.views.Loading
 import by.akella.benefits.util.CommonError
+import by.akella.shared.domain.models.UserModel
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.google.accompanist.systemuicontroller.rememberSystemUiController

@@ -2,14 +2,11 @@ package by.akella.benefits.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import by.akella.benefits.domain.auth.AuthController
-import by.akella.benefits.domain.models.UserModel
-import by.akella.benefits.domain.repos.UsersRepository
-import com.google.firebase.FirebaseApp
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import by.akella.shared.domain.auth.AuthController
+import by.akella.shared.domain.models.UserModel
+import by.akella.shared.domain.repos.UsersRepository
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class CardViewModel(
     private val authController: AuthController,
@@ -40,16 +37,17 @@ class CardViewModel(
     }
 
     private fun loadImage(imagePath: String) {
-        Firebase.storage.reference.child(imagePath)
-            .downloadUrl
-            .addOnSuccessListener {
-                val model = mCardState.value.model.copy(image = it.toString())
-                mCardState.value = CardState.Success.ImageLoaded(model)
-            }
-            .addOnFailureListener {
-                val model = mCardState.value.model.copy(image = "")
-                mCardState.value = CardState.Success.ImageLoaded(model)
-            }
+        viewModelScope.launch {
+            usersRepository.loadImage(imagePath)
+                .catch {
+                    val model = mCardState.value.model.copy(image = "")
+                    mCardState.value = CardState.Success.ImageLoaded(model)
+                }
+                .collect {
+                    val model = mCardState.value.model.copy(image = it.toString())
+                    mCardState.value = CardState.Success.ImageLoaded(model)
+                }
+        }
     }
 }
 

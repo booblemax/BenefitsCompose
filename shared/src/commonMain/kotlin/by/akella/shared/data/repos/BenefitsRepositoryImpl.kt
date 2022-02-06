@@ -7,6 +7,7 @@ import by.akella.shared.domain.models.toPlaceType
 import by.akella.shared.domain.models.toPromoType
 import by.akella.shared.domain.repos.BenefitsRepository
 import byakellasqldelight.benefits.BenefitsQueries
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.*
 
 class BenefitsRepositoryImpl(
@@ -26,6 +27,7 @@ class BenefitsRepositoryImpl(
                     it
                 }
                 .catch {
+                    Napier.e("Error occur", it)
                     emitAll(local.getBenefitList())
                 }
         } else local.getBenefitList()

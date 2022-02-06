@@ -13,11 +13,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import by.akella.benefits.util.CommonError
-import timber.log.Timber
+import io.github.aakira.napier.Napier
 
 @Composable
 fun ErrorView(error: CommonError, retry: () -> Unit) {
-    Timber.e(error.e)
+    Napier.e("Error ocurr", error.e)
 
     Column(
         modifier = Modifier.fillMaxSize(),

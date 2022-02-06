@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
+    kotlin("plugin.serialization") version "1.6.10"
     id("com.android.library")
     id("com.squareup.sqldelight")
 }
@@ -43,15 +44,17 @@ kotlin {
                 implementation(Libs.kotlin_stdlib)
                 implementation(Libs.SQLDelight.runtime)
                 implementation(Libs.coroutinesCoreNative)
-                implementation(Libs.Firebase.Multiplatform.storage)
+                implementation(Libs.napier)
                 implementation(Libs.Firebase.Multiplatform.auth)
                 implementation(Libs.Firebase.Multiplatform.database)
+                implementation(Libs.serialization)
             }
         }
 
         val androidMain by getting {
             dependencies {
                 implementation(Libs.SQLDelight.android)
+                implementation(Libs.napier)
             }
         }
         val iosMain by getting {

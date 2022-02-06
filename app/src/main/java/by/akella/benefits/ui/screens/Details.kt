@@ -18,7 +18,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import by.akella.benefits.R
-import by.akella.benefits.domain.models.BenefitModel
 import by.akella.benefits.util.Resource
 import by.akella.benefits.ui.navigation.Screens
 import by.akella.benefits.ui.viewmodels.DetailsViewModel
@@ -27,6 +26,7 @@ import by.akella.benefits.ui.views.EnumMapper.stringName
 import by.akella.benefits.ui.views.ErrorView
 import by.akella.benefits.ui.views.Loading
 import by.akella.benefits.ui.views.PromoView
+import by.akella.shared.domain.models.BenefitModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable

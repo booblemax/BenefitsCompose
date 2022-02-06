@@ -5,28 +5,26 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import by.akella.benefits.domain.models.BenefitModel
-import by.akella.benefits.domain.PlaceType
-import by.akella.benefits.domain.PromoType
 import by.akella.benefits.util.Resource
 import by.akella.benefits.ui.navigation.Screens
 import by.akella.benefits.ui.viewmodels.BenefitsViewModel
 import by.akella.benefits.ui.views.BenefitItem
 import by.akella.benefits.ui.views.ErrorView
+import by.akella.shared.domain.models.BenefitModel
+import by.akella.shared.domain.models.PlaceType
+import by.akella.shared.domain.models.PromoType
+import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.getViewModel
-import timber.log.Timber
 
 @Composable
 fun Benefits(navigateTo: (String) -> Unit) {
     val viewModel = getViewModel<BenefitsViewModel>()
     val benefitsState = viewModel.benefitsState.collectAsState()
-
+    
     Column {
         TopAppBar(
             title = { Text(text = "Benefits") },
@@ -38,7 +36,7 @@ fun Benefits(navigateTo: (String) -> Unit) {
             is Resource.Success<List<BenefitModel>> ->
                 BenefitsList(false, value.data) { navigateTo(Screens.Details.createRoute(it.id)) }
             is Resource.Error -> ErrorView(error = value.error) {
-                Timber.e("Error")
+                Napier.e("Error")
                 viewModel.loadData()
             }
         }

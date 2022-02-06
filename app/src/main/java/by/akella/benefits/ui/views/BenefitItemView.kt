@@ -27,10 +27,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import by.akella.benefits.R
-import by.akella.benefits.domain.PlaceType
-import by.akella.benefits.domain.PromoType
-import by.akella.benefits.domain.models.BenefitModel
 import by.akella.benefits.ui.views.EnumMapper.stringName
+import by.akella.shared.domain.models.BenefitModel
+import by.akella.shared.domain.models.PlaceType
+import by.akella.shared.domain.models.PromoType
 import coil.annotation.ExperimentalCoilApi
 
 @ExperimentalCoilApi

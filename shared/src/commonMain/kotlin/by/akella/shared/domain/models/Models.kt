@@ -1,7 +1,9 @@
 package by.akella.shared.domain.models
 
+import kotlinx.serialization.Serializable
 import java.util.*
 
+@Serializable
 data class BenefitModel(
     val id: String = UUID.randomUUID().toString(),
     val name: String = "",
@@ -15,6 +17,7 @@ data class BenefitModel(
     val icon: String = ""
 )
 
+@Serializable
 data class UserModel(
     val uid: String = UUID.randomUUID().toString(),
     val fio: String = "",
@@ -27,6 +30,8 @@ internal fun String.toPlaceType() =
     when (this.lowercase()) {
         "cafe" -> PlaceType.CAFE
         "shop" -> PlaceType.SHOP
+        "service" -> PlaceType.SERVICE
+        "quest" -> PlaceType.QUEST
         else -> PlaceType.OTHER
     }
 

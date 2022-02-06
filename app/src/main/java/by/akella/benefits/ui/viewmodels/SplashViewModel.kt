@@ -2,11 +2,10 @@ package by.akella.benefits.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import by.akella.benefits.domain.auth.AuthController
-import by.akella.benefits.domain.auth.SignInState
+import by.akella.shared.domain.auth.AuthController
+import by.akella.shared.domain.auth.SignInState
 import kotlinx.coroutines.launch
 import by.akella.benefits.util.isValidEmail
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
 class SplashViewModel(

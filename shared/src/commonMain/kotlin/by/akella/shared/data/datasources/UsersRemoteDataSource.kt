@@ -5,5 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface UsersRemoteDataSource {
 
-    suspend fun getUserData(uid: String): Flow<UserModel>
+    fun getUserData(uid: String): Flow<UserModel>
+
+    fun getImageByUrl(imageUrl: String): Flow<Any>
 }

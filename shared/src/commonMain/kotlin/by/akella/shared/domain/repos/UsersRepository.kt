@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface UsersRepository {
 
     fun getUserData(uid: String): Flow<UserModel>
+
+    fun loadImage(imagePath: String): Flow<Any>
 }

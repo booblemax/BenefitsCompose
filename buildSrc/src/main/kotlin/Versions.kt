@@ -25,30 +25,29 @@ object Versions {
 
     const val googleServices = "4.3.10"
     const val gradle = "7.0.3"
-    const val kotlin = "1.5.30"
+    const val kotlin = "1.5.31"
     const val appcompat = "1.3.1"
     const val ktx = "1.6.0"
     const val material = "1.4.0"
-    const val compose = "1.0.3"
+    const val compose = "1.0.5"
     const val compose_activity = "1.3.1"
     const val navigation = "2.4.0-alpha06"
     const val lifecycleKtx = "2.4.0-rc01"
-    const val koin = "3.1.2"
+    const val koin = "3.1.5"
     const val coil = "1.3.2"
     const val accompanist = "0.18.0"
-    const val firebaseBom = "28.4.0"
     const val firebaseDatabase = "20.0.2"
     const val firebaseStorage = "20.0.0"
     const val firebaseAuth = "21.0.1"
     const val firebaseUi = "7.2.0"
     const val firebase = "1.4.3"
     const val timber = "4.7.1"
+    const val napier = "2.4.0"
     const val room = "2.3.0"
     const val gson = "2.8.7"
-    const val conscrypt = "2.4.0"
-    const val threetenabp = "1.2.3"
     const val coroutines = "1.5.2"
     const val coroutinesNative = "1.5.2-native-mt"
+    const val kotlinSerializationJson = "1.3.2"
 }
 
 object Libs {
@@ -62,7 +61,9 @@ object Libs {
     const val lifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleKtx}"
     const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    const val napier = "io.github.aakira:napier:${Versions.napier}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
+    const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerializationJson}"
 
     object Compose {
         const val ui = "androidx.compose.ui:ui:${Versions.compose}"
@@ -97,7 +98,6 @@ object Libs {
         object Multiplatform {
             const val database = "dev.gitlive:firebase-database:${Versions.firebase}"
             const val auth = "dev.gitlive:firebase-auth:${Versions.firebase}"
-            const val storage = "dev.gitlive:firebase-storage:${Versions.firebase}"
         }
     }
 

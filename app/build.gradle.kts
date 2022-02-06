@@ -65,7 +65,7 @@ dependencies {
     implementation(Libs.material)
     implementation(Libs.lifecycleKtx)
     implementation(Libs.coil)
-    implementation(Libs.timber)
+    implementation(Libs.napier)
     implementation(Libs.gson)
 
     implementation(Libs.Compose.ui)
@@ -79,15 +79,6 @@ dependencies {
 
     implementation(Libs.Accompanist.placeholder)
     implementation(Libs.Accompanist.systemUiController)
-
-    implementation(Libs.Room.runtime)
-    implementation(Libs.Room.ktx)
-    kapt(Libs.Room.compiler)
-
-    implementation(Libs.Firebase.databaseKtx)
-    implementation(Libs.Firebase.authKtx)
-    implementation(Libs.Firebase.storageKtx)
-    implementation(Libs.Firebase.uiStorage)
 
     implementation(project(mapOf("path" to ":shared")))
 }
