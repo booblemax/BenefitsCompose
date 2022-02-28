@@ -43,13 +43,13 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import org.koin.androidx.compose.getViewModel
 
 @ExperimentalCoilApi
-@ExperimentalUnitApi
 @Composable
-fun Card(navigateTo: (String) -> Unit) {
+fun Card(
+    viewModel: CardViewModel,
+    navigateTo: (String) -> Unit
+) {
     val systemUiController = rememberSystemUiController()
     val color = MaterialTheme.colors.surface
-
-    val viewModel = getViewModel<CardViewModel>()
     val cardState = viewModel.cardState.collectAsState()
 
     CardStateScreen(state = cardState.value, viewModel = viewModel, navigateTo = navigateTo)

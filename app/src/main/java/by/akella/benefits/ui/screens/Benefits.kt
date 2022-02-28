@@ -1,14 +1,18 @@
 package by.akella.benefits.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import by.akella.benefits.R
 import by.akella.benefits.util.Resource
 import by.akella.benefits.ui.navigation.Screens
 import by.akella.benefits.ui.viewmodels.BenefitsViewModel
@@ -19,16 +23,24 @@ import by.akella.shared.domain.models.PlaceType
 import by.akella.shared.domain.models.PromoType
 import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.component.getScopeId
+import org.koin.core.component.getScopeName
 
 @Composable
-fun Benefits(navigateTo: (String) -> Unit) {
+fun Benefits(
+    navigateTo: (String) -> Unit
+) {
     val viewModel = getViewModel<BenefitsViewModel>()
+    Napier.i { "Benefits recompose with viewModel ${viewModel} and scope ${viewModel.getScopeName()}" }
     val benefitsState = viewModel.benefitsState.collectAsState()
-    
+
     Column {
         TopAppBar(
             title = { Text(text = "Benefits") },
-            backgroundColor = MaterialTheme.colors.primaryVariant
+            backgroundColor = MaterialTheme.colors.primaryVariant,
+            actions = { IconButton(onClick = { viewModel.addTestCard() }) {
+                Image(painter = painterResource(id = R.drawable.ic_add), contentDescription = "add")
+            } }
         )
         when (val value = benefitsState.value) {
             is Resource.Loading ->

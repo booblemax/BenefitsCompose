@@ -11,13 +11,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
 import androidx.navigation.navigation
 import by.akella.benefits.ui.screens.*
+import by.akella.benefits.ui.viewmodels.BenefitsViewModel
+import by.akella.benefits.ui.viewmodels.CardViewModel
+import by.akella.benefits.ui.viewmodels.SplashViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import io.github.aakira.napier.Napier
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.component.getScopeId
 
 @ExperimentalAnimationApi
-@OptIn(ExperimentalUnitApi::class)
 @Composable
 fun NavGraph(
     navController: NavHostController,
@@ -29,8 +33,12 @@ fun NavGraph(
         startDestination = Screens.Splash.screenName,
     ) {
         composable(Screens.Splash.screenName) {
-            Splash { route ->
-                navController.navigate(route) { popUpTo(Screens.Splash.screenName) { inclusive = true } }
+            Napier.i { "Splash recompose" }
+            val viewModel = getViewModel<SplashViewModel>(owner = it)
+            Splash(viewModel) { route ->
+                navController.navigate(route) {
+                    popUpTo(Screens.Splash.screenName) { inclusive = true }
+                }
             }
         }
         navigation(
@@ -38,6 +46,7 @@ fun NavGraph(
             startDestination = Screens.HomeScreens.List.screenName
         ) {
             composable(Screens.HomeScreens.List.screenName) {
+                Napier.i { "Benefits recompose" }
                 ApplyDefaultSystemBarsColors()
                 Benefits { route -> navController.navigate(route) }
             }
@@ -46,22 +55,23 @@ fun NavGraph(
                 BenefitMap()
             }
             composable(Screens.HomeScreens.Card.screenName) {
-                Card { route: String ->
+                val viewModel = getViewModel<CardViewModel>(owner = it)
+                Card(viewModel) { route: String ->
                     navController.navigate(route) {
                         popUpTo(route) { inclusive = true }
                     }
                 }
             }
         }
-        composable(
-            Screens.Details.screenName,
-            arguments = listOf(navArgument("modelId") { type = NavType.StringType })
-        ) {
-            ApplyDefaultSystemBarsColors()
-            Details(modelId = it.arguments?.getString("modelId", "-1") ?: "-1") {
-                navController.navigateUp()
-            }
-        }
+//        composable(
+//            Screens.Details.screenName,
+//            arguments = listOf(navArgument("modelId") { type = NavType.StringType })
+//        ) {
+//            ApplyDefaultSystemBarsColors()
+//            Details(modelId = it.arguments?.getString("modelId", "-1") ?: "-1") {
+//                navController.navigateUp()
+//            }
+//        }
     }
 }
 

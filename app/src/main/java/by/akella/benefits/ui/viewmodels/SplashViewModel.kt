@@ -12,8 +12,8 @@ class SplashViewModel(
     private val auth: AuthController
 ) : ViewModel() {
 
-    private val mAuthState = MutableSharedFlow<AuthState>()
-    val authState: SharedFlow<AuthState> get() = mAuthState
+    private val mAuthState = MutableStateFlow<AuthState>(AuthState.Loading)
+    val authState: StateFlow<AuthState> get() = mAuthState
 
     suspend fun checkIsAuth() {
         mAuthState.emit(

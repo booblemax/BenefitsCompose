@@ -8,12 +8,12 @@ import byakellasqldelight.benefits.UsersQueries
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 
+@ExperimentalCoroutinesApi
 class UsersRepositoryImpl(
     private val remote: UsersRemoteDataSource,
     private val local: UsersLocalDataSource
 ) : UsersRepository {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun getUserData(uid: String): Flow<UserModel> =
         local.getUserData(uid)
             .flatMapLatest { model ->

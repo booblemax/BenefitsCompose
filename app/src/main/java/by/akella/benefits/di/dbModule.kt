@@ -11,24 +11,12 @@ import by.akella.shared.data.datasources.local.UsersLocalDataSourceImpl
 import by.akella.shared.data.datasources.remote.BenefitsRemoteDataSourceImpl
 import by.akella.shared.data.datasources.remote.UsersRemoteDataSourceImpl
 import by.akella.sqldelight.benefits.Benefits
+import okhttp3.OkHttpClient
 import org.koin.dsl.module
 
 val dataModule = module {
 
-//    single<BenefitsDb> {
-//        Room.databaseBuilder(get(), BenefitsDb::class.java, "benefitsDb").build()
-//    }
-//
-//    factory<BenefitsRemoteApi> { BenefitsRemoteApiImpl(get()) }
-//
-//    factory<UsersRemoteApi> { UsersRemoteApiImpl(get()) }
-//
-//    factory { get<BenefitsDb>().benefitsDao }
-//
-//    factory { get<BenefitsDb>().usersDao }
-
-//    single { Firebase.database }
-
+    single { OkHttpClient() }
     single<Benefits> { createDatabase(DriverFactory(get())) }
 
     factory<BenefitsRemoteDataSource> { BenefitsRemoteDataSourceImpl() }

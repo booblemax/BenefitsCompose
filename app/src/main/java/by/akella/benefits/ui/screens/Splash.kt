@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import by.akella.benefits.BuildConfig
 import by.akella.benefits.R
 import by.akella.benefits.ui.navigation.Screens
@@ -30,26 +31,28 @@ import by.akella.benefits.util.MAX_EMAIL_LENGTH
 import by.akella.benefits.util.MAX_PASSWORD_LENGTH
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
-import org.koin.androidx.compose.getViewModel
 
 @ExperimentalAnimationApi
 @Composable
-fun Splash(navigateTo: (String) -> Unit) {
-    val systemUiController = rememberSystemUiController()
-    val color = MaterialTheme.colors.surface
-    SideEffect {
-        systemUiController.setStatusBarColor(color)
-    }
-
-    val viewModel = getViewModel<SplashViewModel>()
+fun Splash(
+    viewModel: SplashViewModel,
+    navigateTo: (String) -> Unit
+) {
     val authState by viewModel.authState.collectAsState(initial = AuthState.Loading)
 
-    if (authState is AuthState.SignedIn) navigateTo(Screens.Home.screenName)
-    LoginForm(authState) { email, pass -> viewModel.signIn(email, pass) }
+    if (authState !is AuthState.SignedIn) {
+        LoginForm(authState) { email, pass -> viewModel.signIn(email, pass) }
+    }
 
-    LaunchedEffect(Screens.Splash) {
+    LaunchedEffect(viewModel) {
         delay(800L)
         viewModel.checkIsAuth()
+    }
+
+    LaunchedEffect(authState) {
+        if (authState is AuthState.SignedIn) {
+            navigateTo(Screens.Home.screenName)
+        }
     }
 }
 

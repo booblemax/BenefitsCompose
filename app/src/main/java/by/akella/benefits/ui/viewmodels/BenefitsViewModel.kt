@@ -34,4 +34,18 @@ class BenefitsViewModel(
                 .launchIn(scope)
         }
     }
+
+    fun addTestCard() {
+        val models = (mBenefitsState.value as Resource.Success).data.toMutableList()
+        models.add(
+            BenefitModel(
+                name = "New Test Bla Bla",
+                discount = "10",
+                description = "description description description"
+            )
+        )
+        scope.launch {
+            mBenefitsState.emit(Resource.Success(models))
+        }
+    }
 }
